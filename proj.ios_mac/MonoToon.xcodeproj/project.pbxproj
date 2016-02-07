@@ -63,7 +63,8 @@
 		672E4A72BFA187AB96333ED4 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 679045D2A08404C3C677D882 /* CoreData.framework */; };
 		79715DB11C640B1A00E8AFF2 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 79715DAE1C640B1A00E8AFF2 /* sqlite3.c */; };
 		79715DB41C640B9800E8AFF2 /* Helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79715DB21C640B9800E8AFF2 /* Helper.cpp */; };
-		79BF74F21C672C9A00E3B8EC /* Gamescene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79BF74F01C672C9A00E3B8EC /* Gamescene.cpp */; };
+		79BF74F21C672C9A00E3B8EC /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79BF74F01C672C9A00E3B8EC /* GameScene.cpp */; };
+		79BF74F91C67376400E3B8EC /* VirtualPad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79BF74F71C67376400E3B8EC /* VirtualPad.cpp */; };
 		7AB54498A0DE9601BEA9EC50 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1684B5D95625F6CDB3EE536 /* AdSupport.framework */; };
 		8262943E1AAF051F00CB7CF7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8262943D1AAF051F00CB7CF7 /* Security.framework */; };
 		89714F4C9FF3108FF3237358 /* sdkbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14AC4504B79AC56570D5639A /* sdkbox.framework */; };
@@ -171,8 +172,10 @@
 		79715DB01C640B1A00E8AFF2 /* sqlite3ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sqlite3ext.h; sourceTree = "<group>"; };
 		79715DB21C640B9800E8AFF2 /* Helper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Helper.cpp; sourceTree = "<group>"; };
 		79715DB31C640B9800E8AFF2 /* Helper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Helper.hpp; sourceTree = "<group>"; };
-		79BF74F01C672C9A00E3B8EC /* Gamescene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Gamescene.cpp; sourceTree = "<group>"; };
-		79BF74F11C672C9A00E3B8EC /* Gamescene.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Gamescene.hpp; sourceTree = "<group>"; };
+		79BF74F01C672C9A00E3B8EC /* GameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameScene.cpp; sourceTree = "<group>"; };
+		79BF74F11C672C9A00E3B8EC /* GameScene.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GameScene.hpp; sourceTree = "<group>"; };
+		79BF74F71C67376400E3B8EC /* VirtualPad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VirtualPad.cpp; sourceTree = "<group>"; };
+		79BF74F81C67376400E3B8EC /* VirtualPad.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VirtualPad.hpp; sourceTree = "<group>"; };
 		8262943D1AAF051F00CB7CF7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		91E44A67B79542558F456EC2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
 		AA1C4B909D0C77EB39D211EA /* PluginGoogleAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PluginGoogleAnalytics.framework; sourceTree = SOURCE_ROOT; };
@@ -338,8 +341,10 @@
 				46880B8519C43A87006E1F66 /* AppDelegate.h */,
 				46880B8619C43A87006E1F66 /* HelloWorldScene.cpp */,
 				46880B8719C43A87006E1F66 /* HelloWorldScene.h */,
-				79BF74F01C672C9A00E3B8EC /* Gamescene.cpp */,
-				79BF74F11C672C9A00E3B8EC /* Gamescene.hpp */,
+				79BF74F01C672C9A00E3B8EC /* GameScene.cpp */,
+				79BF74F11C672C9A00E3B8EC /* GameScene.hpp */,
+				79BF74F71C67376400E3B8EC /* VirtualPad.cpp */,
+				79BF74F81C67376400E3B8EC /* VirtualPad.hpp */,
 				79715DB21C640B9800E8AFF2 /* Helper.cpp */,
 				79715DB31C640B9800E8AFF2 /* Helper.hpp */,
 				79715DAD1C640B1A00E8AFF2 /* sqlite */,
@@ -553,12 +558,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
+				79BF74F91C67376400E3B8EC /* VirtualPad.cpp in Sources */,
 				79715DB11C640B1A00E8AFF2 /* sqlite3.c in Sources */,
 				46880B8A19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				79715DB41C640B9800E8AFF2 /* Helper.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
-				79BF74F21C672C9A00E3B8EC /* Gamescene.cpp in Sources */,
+				79BF74F21C672C9A00E3B8EC /* GameScene.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
