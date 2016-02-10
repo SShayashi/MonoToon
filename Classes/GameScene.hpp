@@ -20,7 +20,7 @@ class GameScene : public cocos2d::Layer
 private:
     GameScene();
     ~GameScene();
-    CC_SYNTHESIZE_RETAIN(Stagelayer*, _stagelayer, StageLayer);
+    CC_SYNTHESIZE_RETAIN(StageLayer*, _stagelayer, StageLayer);
 public:
     
 

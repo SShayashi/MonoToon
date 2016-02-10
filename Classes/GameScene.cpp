@@ -38,7 +38,7 @@ bool GameScene::init()
     auto rootNode = CSLoader::createNode("MainScene.csb");
     addChild(rootNode);
     
-    auto stagelayer = Stagelayer::create();
+    auto stagelayer = StageLayer::create();
     _stagelayer = stagelayer;
     addChild(_stagelayer);
     
