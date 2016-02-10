@@ -84,7 +84,6 @@ void VirtualPad::update(float dt){
  *@param y
  */
 void VirtualPad::startPad(int x,int y,int touch_id){
-    //画面をタッチしたら描画開始
     
     /* TODO : PADの下地部分をタッチしたかどうか　(最初はpad部分をタッチしないと反応しないようにする)*/
     touchFlag = true;
@@ -260,28 +259,28 @@ int VirtualPad::get8Way(){
  */
 int VirtualPad::getSpeed(){
     /* 座標用 */
-    if(now_r >= 150){
-        return 8;
-    }
-    
-    if(now_r >= 110){
-        return 6;
-    }
-    
-    if(now_r >= 70){
-        return 4;
-    }
-    
-    if(now_r >= 30){
-        return 2;
-    }
-    
-    if(now_r >= 0){
-        return 0;
-    }
-    ////     ここに来ることはないはず
-    //    CCLOG("Errorlog in VirtualPad");
-    //    return -1;
+//    if(now_r >= 150){
+//        return 8;
+//    }
+//    
+//    if(now_r >= 110){
+//        return 6;
+//    }
+//    
+//    if(now_r >= 70){
+//        return 4;
+//    }
+//    
+//    if(now_r >= 30){
+//        return 2;
+//    }
+//    
+//    if(now_r >= 0){
+//        return 0;
+//    }
+//    ////     ここに来ることはないはず
+//    //    CCLOG("Errorlog in VirtualPad");
+//    //    return -1;
     /* 物理エンジンよう */
     return now_r*3;
 }
