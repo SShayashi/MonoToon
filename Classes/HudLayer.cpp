@@ -10,22 +10,22 @@
 
 USING_NS_CC;
 
-Scene* HudLayer::createScene()
-{
-    auto scene = Scene::create();
-    auto layer = HudLayer::create();
-    scene->addChild(layer);
-    return scene;
+HudLayer::HudLayer():
+_buttonTouchFlag(false){
+    
 }
 
-
+HudLayer::~HudLayer(){
+    
+}
 bool HudLayer::init()
 {
     if ( !Layer::init() )
     {
         return false;
     }
-    
+    winSize = Director::getInstance()->getWinSize();
+
     /* マルチタップリスナーの設置 */
     auto listener = EventListenerTouchAllAtOnce::create();
     listener->setEnabled(true);
@@ -37,6 +37,39 @@ bool HudLayer::init()
     auto virPad = VirtualPad::create();
     _virPad = virPad;
     addChild(_virPad);
+    
+    auto uButton = ui::Button::create();
+    uButton->setTouchEnabled(true);
+    uButton->loadTextures("button/button.png", "button/button_touched.png", "");
+    uButton->setPosition(Point(winSize.width * 4/5, winSize.height / 2) + Point(0, -100));
+    
+    //button をおした時の処理
+    uButton->addTouchEventListener([this](Ref* pSender, cocos2d::ui::Widget::TouchEventType type){
+        switch (type)
+        {
+            case ui::Widget::TouchEventType::BEGAN:
+                log("TOUCH_EVENT_BEGAN");
+                _buttonTouchFlag = true;
+                break;
+            case ui::Widget::TouchEventType::MOVED:
+                log("TOUCH_EVENT_MOVED");
+                _buttonTouchFlag = true;
+                break;
+            case ui::Widget::TouchEventType::ENDED:
+                log("TOUCH_EVENT_ENDED");
+                _buttonTouchFlag = false;
+                break;
+            case ui::Widget::TouchEventType::CANCELED:
+                log("TOUCH_EVENT_CANCELED");
+                _buttonTouchFlag = false;
+                break;
+            default:
+                break;
+        }
+    });
+
+    addChild(uButton);
+
     
     this->scheduleUpdate();
     
