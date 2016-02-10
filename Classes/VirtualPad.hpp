@@ -21,10 +21,6 @@ private:
     VirtualPad();
     /*デストラクタ*/
     ~VirtualPad();
-    //Pad下地
-    Sprite* padBack;
-    //Pad
-    Sprite* padFront;
     //表示フラグ
     bool touchFlag;
     //Padの初期位置
@@ -52,7 +48,10 @@ private:
     int touchID;
     
 public:
-    
+    //Pad下地
+    CC_SYNTHESIZE_RETAIN(Sprite*, _padBack, PadBack);
+    //Pad
+    CC_SYNTHESIZE_RETAIN(Sprite*, _padFront, PadFront);
     void update(float dt)override;
     CREATE_FUNC(VirtualPad);
     bool init() override;

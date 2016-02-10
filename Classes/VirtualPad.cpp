@@ -17,13 +17,17 @@
 /**
  *コンストラクタ
  */
-VirtualPad::VirtualPad(){
+VirtualPad::VirtualPad()
+:_padBack(NULL)
+,_padFront(NULL){
 }
 
 /**
  *デストラクタ
  */
 VirtualPad::~VirtualPad(){
+    CC_SAFE_RELEASE_NULL(_padBack);
+    CC_SAFE_RELEASE_NULL(_padFront);
 }
 
 
@@ -37,22 +41,22 @@ bool VirtualPad::init(){
     Size size = Director::getInstance()->getVisibleSize();
     
     //画像の生成（Pad下地）
-    padBack = Sprite::create("virtualpad/virtualpad_bg.png");
-    padBack->setAnchorPoint(Point(0.5f,0.5f));
-    padBack->setPosition(Point(size.width*VIRTUAL_PAD_POSITION_RATE_X, size.height*VIRTUAL_PAD_POSITION_RATE_Y));
+    _padBack = Sprite::create("virtualpad/virtualpad_bg.png");
+    _padBack->setAnchorPoint(Point(0.5f,0.5f));
+    _padBack->setPosition(Point(size.width*VIRTUAL_PAD_POSITION_RATE_X, size.height*VIRTUAL_PAD_POSITION_RATE_Y));
     
     /* 画像の生成（Pad操作部分） */
-    padFront = Sprite::create("virtualpad/virtualpad_pad.png");
-    padFront->setAnchorPoint(Point(0.5f,0.5f));
-    padFront->setPosition(Point(size.width*VIRTUAL_PAD_POSITION_RATE_X, size.height*VIRTUAL_PAD_POSITION_RATE_Y));
+    _padFront = Sprite::create("virtualpad/virtualpad_pad.png");
+    _padFront->setAnchorPoint(Point(0.5f,0.5f));
+    _padFront->setPosition(Point(size.width*VIRTUAL_PAD_POSITION_RATE_X, size.height*VIRTUAL_PAD_POSITION_RATE_Y));
     
     /* パッドの初期位置 */
-    init_x = padFront->getPositionX();
-    init_y = padFront->getPositionY();
+    init_x = _padFront->getPositionX();
+    init_y = _padFront->getPositionY();
     
     //レイヤーに追加
-    this->addChild(padBack,10000);
-    this->addChild(padFront,10001);
+    this->addChild(_padBack,10000);
+    this->addChild(_padFront,10001);
     
     //最大半径
     max_r = VIRTUAL_PAD_MAX_RATE ;
@@ -113,7 +117,7 @@ void VirtualPad::endPad(int touch_id){
     now_r = 0;
     /* タッチを離したら元の位置に戻す */
     Size size = Director::getInstance()->getVisibleSize();
-    padFront->setPosition(Point(size.width*VIRTUAL_PAD_POSITION_RATE_X, size.height*VIRTUAL_PAD_POSITION_RATE_Y));
+    _padFront->setPosition(Point(size.width*VIRTUAL_PAD_POSITION_RATE_X, size.height*VIRTUAL_PAD_POSITION_RATE_Y));
 }
 
 /**
@@ -145,7 +149,7 @@ void VirtualPad::update(int x,int y,int touch_id){
     now_x = x;
     now_y = y;
     //    padBack->setPosition(Point(init_x, init_y));
-    padFront->setPosition(Point(now_x, now_y));
+    _padFront->setPosition(Point(now_x, now_y));
     
 }
 
@@ -283,13 +287,6 @@ int VirtualPad::getSpeed(){
 //    //    return -1;
     /* 物理エンジンよう */
     return now_r*3;
-}
-
-/**
- *
- */
-Sprite* VirtualPad::getPadBack(){
-    return padBack;
 }
 
 
