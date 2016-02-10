@@ -28,21 +28,21 @@ private:
     //表示フラグ
     bool touchFlag;
     //Padの初期位置
-    int init_x;
-    int init_y;
+    float init_x;
+    float init_y;
     //現在位置
-    int now_x;
-    int now_y;
+    float now_x;
+    float now_y;
     //移動量
-    int d_x;
-    int d_y;
+    float d_x;
+    float d_y;
     //移動sin,cos
     float way_x;
     float way_y;
     //最大半径
-    int max_r;
+    float max_r;
     //現在の半径
-    int now_r;
+    float now_r;
     //角度
     float angle;
     //角度テーブル
@@ -66,6 +66,7 @@ public:
     int get4Way();
     int get8Way();
     int getSpeed();
+    Vec2 getMovent();
     Sprite* getPadBack();
     
 };

@@ -11,8 +11,8 @@
 #define VIRTUAL_PAD_MAX_RATE 150
 #define VIRTUAL_PAD_MIN_RATE 10
 
-#define VIRTUAL_PAD_POSITION_RATE_X 1/2
-#define VIRTUAL_PAD_POSITION_RATE_Y 22/100
+#define VIRTUAL_PAD_POSITION_RATE_X 1/10
+#define VIRTUAL_PAD_POSITION_RATE_Y 3/10
 
 /**
  *コンストラクタ
@@ -292,3 +292,7 @@ Sprite* VirtualPad::getPadBack(){
     return padBack;
 }
 
+
+Vec2 VirtualPad::getMovent(){
+    return Vec2(d_x ,d_y);
+}
