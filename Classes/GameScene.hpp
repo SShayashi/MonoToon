@@ -11,18 +11,20 @@
 
 #include <stdio.h>
 #include "cocos2d.h"
+#include "HudLayer.hpp"
 USING_NS_CC;
 class GameScene : public cocos2d::Layer
 {
+private:
+    GameScene();
+    ~GameScene();
 public:
-    /* タッチイベントリスナー */
-    void onTouchesBegan(const std::vector<Touch*>& touches, Event *unused_event);
-    void onTouchesMoved(const std::vector<Touch*>& touches, Event *unused_event);
-    void onTouchesEnded(const std::vector<Touch*>& touches, Event *unused_event);
-
+    
+    CC_SYNTHESIZE_RETAIN(HudLayer*, _hudlayer, HudLayer);
     
     static cocos2d::Scene* createScene();
-    virtual bool init();
+    void update(float dt)override;
+    virtual bool init()override;
     CREATE_FUNC(GameScene);
 };
 
