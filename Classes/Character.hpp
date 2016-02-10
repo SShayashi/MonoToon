@@ -27,7 +27,7 @@ public:
     void doMove(cocos2d::Vec2 velocity);
     
     bool init() override;
-    void update(float dt) override;
+//    void update(float dt) override;
     //    CC_SYNTHESIZE_PASS_BY_REF(cocos2d::Vec2, _acceleration, Acceleration);
     CC_SYNTHESIZE(int , _oldSpeed, OldSpeed);
     CC_SYNTHESIZE(int , _speed, Speed);
