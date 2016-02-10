@@ -12,13 +12,11 @@
 
 USING_NS_CC;
 using namespace cocostudio::timeline;
-GameScene::GameScene():
-_hudlayer(NULL)
+GameScene::GameScene()
 {
     
 }
 GameScene::~GameScene(){
-    CC_SAFE_RELEASE_NULL(_hudlayer);
 }
 
 Scene* GameScene::createScene()
@@ -40,9 +38,9 @@ bool GameScene::init()
     auto rootNode = CSLoader::createNode("MainScene.csb");
     addChild(rootNode);
     
-    auto hudlayer = HudLayer::create();
-    _hudlayer = hudlayer;
-    addChild(_hudlayer);
+    auto stagelayer = Stagelayer::create();
+    _stagelayer = stagelayer;
+    addChild(_stagelayer);
     
     this->scheduleUpdate();
     
@@ -50,5 +48,4 @@ bool GameScene::init()
 }
 
 void GameScene::update(float dt){
-    
 }

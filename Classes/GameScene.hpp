@@ -12,15 +12,18 @@
 #include <stdio.h>
 #include "cocos2d.h"
 #include "HudLayer.hpp"
+#include "StageLayer.hpp"
+
 USING_NS_CC;
 class GameScene : public cocos2d::Layer
 {
 private:
     GameScene();
     ~GameScene();
+    CC_SYNTHESIZE_RETAIN(Stagelayer*, _stagelayer, StageLayer);
 public:
     
-    CC_SYNTHESIZE_RETAIN(HudLayer*, _hudlayer, HudLayer);
+
     
     static cocos2d::Scene* createScene();
     void update(float dt)override;

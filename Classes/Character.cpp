@@ -56,5 +56,7 @@ bool Character::init()
 /** 移動量からキャラを動かす
  */
 void Character::doMove(Vec2 velocity){
-    this->setPosition(this->getPosition() + velocity);
+    auto winSize = Director::getInstance()->getWinSize();
+    Point newPosition = this->getPosition()+velocity;
+    this->setPosition(newPosition.getClampPoint(Vec2(0,0), Vec2(winSize.width, winSize.height)));
 }
