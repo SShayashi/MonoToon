@@ -8,7 +8,7 @@
 
 #include "Player.hpp"
 USING_NS_CC;
-int FRAME_COUNT=3;
+#define PLAYER_SPEED_DEFAULT 0.5
 
 Player::Player()
 {
@@ -39,7 +39,7 @@ bool Player::init()
 //    }
 //    this->setAnimation();
     setTag(1);
-    setSpeed(1);
+    setSpeed(PLAYER_SPEED_DEFAULT);
     
     this->scheduleUpdate();
     
