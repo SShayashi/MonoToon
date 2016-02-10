@@ -20,6 +20,33 @@ private:
     Helper();
     static Helper* mHelper;
 public:
+    //ゲーム内で利用する共用体
+
+    //インクの種類
+    enum class ShotInkType
+    {
+        PLAYER,
+        ENEMY,
+        COUNT
+    };
+    
+    //床に塗るインクの種類
+    enum class DrawInkType
+    {
+        GUN,
+        ROLLER,
+        CHARGER,
+        COUNT
+    };
+    
+    //床に塗られたインクの種類
+    enum class TiledInkType{
+        PLAYER,
+        ENEMY,
+        NONE,
+        COUNT
+    };
+    
     static Helper* getInstance();
     
     // ゲーム全体で使用したい変数
