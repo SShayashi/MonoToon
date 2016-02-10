@@ -34,6 +34,10 @@ bool HudLayer::init()
     listener->onTouchesEnded = CC_CALLBACK_2(HudLayer::onTouchesEnded, this);
     this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
     
+    auto virPad = VirtualPad::create();
+    _virPad = virPad;
+    addChild(_virPad);
+    
     this->scheduleUpdate();
     
     return true;

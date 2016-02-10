@@ -37,17 +37,17 @@ bool Character::init()
 //        auto frame = SpriteFrame::create(fileName,rect);
 //        _frames.pushBack(frame);
 //    }
-//    this->setAnimation();
-    
-    
-    /* 剛体の設置 */
-    auto body = PhysicsBody::createCircle(this->getContentSize().width / 2.0);
-    // 剛体の回転を無効にする
-    body->setRotationEnable(false);
-    // 全ての剛体の接触判定を行う
-    body->setContactTestBitmask(INT_MAX);
-    
-    this->setPhysicsBody(body);
+////    this->setAnimation();
+//    
+//    
+//    /* 剛体の設置 */
+//    auto body = PhysicsBody::createCircle(this->getContentSize().width / 2.0);
+//    // 剛体の回転を無効にする
+//    body->setRotationEnable(false);
+//    // 全ての剛体の接触判定を行う
+//    body->setContactTestBitmask(INT_MAX);
+//    
+//    this->setPhysicsBody(body);
     this->scheduleUpdate();
     
     return true;

@@ -38,7 +38,7 @@ bool Player::init()
 //        _frames.pushBack(frame);
 //    }
 //    this->setAnimation();
-    
+    this->setTag(1);
     this->scheduleUpdate();
     
     return true;

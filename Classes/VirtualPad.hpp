@@ -66,7 +66,6 @@ public:
     int get8Way();
     int getSpeed();
     Vec2 getMovent();
-    Sprite* getPadBack();
     
 };
 
