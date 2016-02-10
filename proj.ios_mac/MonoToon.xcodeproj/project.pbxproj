@@ -65,6 +65,7 @@
 		7962F8081C6B61FD00E425B2 /* Character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7962F8061C6B61FD00E425B2 /* Character.cpp */; };
 		7962F80B1C6B634F00E425B2 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7962F8091C6B634F00E425B2 /* Player.cpp */; };
 		7962F80E1C6B8FFA00E425B2 /* HomeScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7962F80C1C6B8FFA00E425B2 /* HomeScene.cpp */; };
+		7962F8111C6B99BE00E425B2 /* StageLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7962F80F1C6B99BE00E425B2 /* StageLayer.cpp */; };
 		79715DB11C640B1A00E8AFF2 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 79715DAE1C640B1A00E8AFF2 /* sqlite3.c */; };
 		79715DB41C640B9800E8AFF2 /* Helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79715DB21C640B9800E8AFF2 /* Helper.cpp */; };
 		79BF74F21C672C9A00E3B8EC /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79BF74F01C672C9A00E3B8EC /* GameScene.cpp */; };
@@ -179,6 +180,8 @@
 		7962F80A1C6B634F00E425B2 /* Player.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Player.hpp; sourceTree = "<group>"; };
 		7962F80C1C6B8FFA00E425B2 /* HomeScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HomeScene.cpp; sourceTree = "<group>"; };
 		7962F80D1C6B8FFA00E425B2 /* HomeScene.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = HomeScene.hpp; sourceTree = "<group>"; };
+		7962F80F1C6B99BE00E425B2 /* StageLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StageLayer.cpp; sourceTree = "<group>"; };
+		7962F8101C6B99BE00E425B2 /* StageLayer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = StageLayer.hpp; sourceTree = "<group>"; };
 		79715DAE1C640B1A00E8AFF2 /* sqlite3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sqlite3.c; sourceTree = "<group>"; };
 		79715DAF1C640B1A00E8AFF2 /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sqlite3.h; sourceTree = "<group>"; };
 		79715DB01C640B1A00E8AFF2 /* sqlite3ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sqlite3ext.h; sourceTree = "<group>"; };
@@ -427,6 +430,8 @@
 			children = (
 				7962F8011C6B5ACA00E425B2 /* HudLayer.cpp */,
 				7962F8021C6B5ACA00E425B2 /* HudLayer.hpp */,
+				7962F80F1C6B99BE00E425B2 /* StageLayer.cpp */,
+				7962F8101C6B99BE00E425B2 /* StageLayer.hpp */,
 				7962F7FF1C6B5A5200E425B2 /* Scenes */,
 			);
 			name = Layers;
@@ -613,6 +618,7 @@
 				79BF74F91C67376400E3B8EC /* VirtualPad.cpp in Sources */,
 				79715DB11C640B1A00E8AFF2 /* sqlite3.c in Sources */,
 				7962F8031C6B5ACA00E425B2 /* HudLayer.cpp in Sources */,
+				7962F8111C6B99BE00E425B2 /* StageLayer.cpp in Sources */,
 				46880B8A19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				7962F80E1C6B8FFA00E425B2 /* HomeScene.cpp in Sources */,
