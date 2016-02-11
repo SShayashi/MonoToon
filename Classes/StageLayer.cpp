@@ -8,6 +8,7 @@
 
 #include "StageLayer.hpp"
 #define SHOT_INTERBAL 0.2
+#define PI 3.141592653589793
 USING_NS_CC;
 
 StageLayer::StageLayer():
@@ -74,10 +75,22 @@ void StageLayer::shotInk(Character &chara){
 
     //画像の作成
     auto ink = Sprite::create(chara.getInk()->getResourceName());
+    ink->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
     ink->setPosition(chara.getPosition());
+    
+    //ベクトルの差分で角度を取ると、より小さい角度で取得するので、キャラの方向から、どちらに回転させるか決めている
+    auto digree = Vec2::angle(chara.getDirectionalVec(), Vec2(1,0)) *180/PI;
+//    CCLOG("Digree : %f",digree);
+    if(chara.getDirectionalVec().y >= 0 ){
+        ink->setRotation(-digree);
+    }else{
+        ink->setRotation(digree);
+    }
+
     this->addChild(ink);
     _shotInks.pushBack(ink);
     
+    //アニメーションの追加
     auto remove_draw = CallFuncN::create([this](Node *node){
        //NodeをSpriteにダウンキャスト
         auto sprite = dynamic_cast<Sprite*>(node);
