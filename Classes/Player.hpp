@@ -19,9 +19,6 @@ class Player :public Character
 protected:
     Player();
     virtual ~Player();
-    char fileName[128] = {0};
-    cocos2d::Rect rect;
-    cocos2d::SpriteFrame *frame;
     
 public:
     bool init() override;

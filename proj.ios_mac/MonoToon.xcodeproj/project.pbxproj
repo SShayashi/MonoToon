@@ -356,7 +356,7 @@
 				46880B8519C43A87006E1F66 /* AppDelegate.h */,
 				46880B8619C43A87006E1F66 /* HelloWorldScene.cpp */,
 				46880B8719C43A87006E1F66 /* HelloWorldScene.h */,
-				7962F8041C6B5B0300E425B2 /* InputComponent */,
+				7962F8041C6B5B0300E425B2 /* GUIInputComponent */,
 				7962F8051C6B61CB00E425B2 /* Characters */,
 				7962F8001C6B5A7A00E425B2 /* Layers */,
 				79715DB21C640B9800E8AFF2 /* Helper.cpp */,
@@ -437,13 +437,13 @@
 			name = Layers;
 			sourceTree = "<group>";
 		};
-		7962F8041C6B5B0300E425B2 /* InputComponent */ = {
+		7962F8041C6B5B0300E425B2 /* GUIInputComponent */ = {
 			isa = PBXGroup;
 			children = (
 				79BF74F71C67376400E3B8EC /* VirtualPad.cpp */,
 				79BF74F81C67376400E3B8EC /* VirtualPad.hpp */,
 			);
-			name = InputComponent;
+			name = GUIInputComponent;
 			sourceTree = "<group>";
 		};
 		7962F8051C6B61CB00E425B2 /* Characters */ = {

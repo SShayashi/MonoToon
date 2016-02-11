@@ -13,22 +13,30 @@
 #include "cocos2d.h"
 #include "Player.hpp"
 #include "HudLayer.hpp"
+#include "Character.hpp"
 
 USING_NS_CC;
-class Stagelayer : public cocos2d::Layer
+class StageLayer : public cocos2d::Layer
 {
-protected:
-    Stagelayer();
-    virtual ~Stagelayer();
+private:
+    float time;
+private:
+    StageLayer();
+    virtual ~StageLayer();
     CC_SYNTHESIZE_RETAIN(Player*, _player, Player);
     CC_SYNTHESIZE_RETAIN(HudLayer*, _hudlayer, HudLayer);
+    CC_SYNTHESIZE(cocos2d::Vector<cocos2d::Sprite *>, _shotInks, ShotInks);
+    CC_SYNTHESIZE(cocos2d::Vector<cocos2d::Sprite *>, _drawedInks, DrawedInks);
 public:
 
+    void shotInk(Character& chara);
+    void drawInk();
+    bool removeShotInk(cocos2d::Sprite *ink);
     static cocos2d::Scene* createScene();
     virtual bool init() override;
     void update(float dt) override;
     
-    CREATE_FUNC(Stagelayer);
+    CREATE_FUNC(StageLayer);
 };
 
 

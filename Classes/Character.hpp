@@ -20,7 +20,11 @@ protected:
     virtual ~Character();
     char fileName[128] = {0};
     cocos2d::Rect rect;
-    cocos2d::SpriteFrame *frame;
+    cocos2d::SpriteFrame *_frame;
+    
+    //インクの形と動きをキャラは持つことができる
+    CC_SYNTHESIZE_RETAIN(cocos2d::Sequence*, _shotMovement,ShotMovement);
+    CC_SYNTHESIZE_RETAIN(cocos2d::Sprite*, _ink,Ink);
     
 public:
     

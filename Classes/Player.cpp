@@ -38,8 +38,16 @@ bool Player::init()
 //        _frames.pushBack(frame);
 //    }
 //    this->setAnimation();
+    
     setTag(1);
     setSpeed(PLAYER_SPEED_DEFAULT);
+    auto ink = Sprite::create("ink/jet.png");
+    setInk(ink);
+    
+    auto move = MoveBy::create(2, Vec2(40, 0 ));
+    
+    auto sequence = Sequence::create(move, NULL);
+    setShotMovement(sequence);
     
     this->scheduleUpdate();
     
@@ -68,5 +76,5 @@ void Player::update(float dt)
 {
     //    CCLOG("player Speed %d",this->getSpeed());
 //    this->setAnimation();
-    
+
 }

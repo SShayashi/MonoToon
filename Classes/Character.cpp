@@ -13,12 +13,15 @@ int FRAME_COUNT=3;
 Character::Character()
 :_speed(NULL)
 ,_oldSpeed(NULL)
+,_shotMovement(NULL)
+,_ink(NULL)
 {
     
 }
 
 Character::~Character(){
-    
+    CC_SAFE_RELEASE_NULL(_shotMovement);
+    CC_SAFE_RELEASE_NULL(_ink);
 }
 
 bool Character::init()
@@ -38,18 +41,8 @@ bool Character::init()
 //        _frames.pushBack(frame);
 //    }
 ////    this->setAnimation();
-//    
-//    
-//    /* 剛体の設置 */
-//    auto body = PhysicsBody::createCircle(this->getContentSize().width / 2.0);
-//    // 剛体の回転を無効にする
-//    body->setRotationEnable(false);
-//    // 全ての剛体の接触判定を行う
-//    body->setContactTestBitmask(INT_MAX);
-//    
-//    this->setPhysicsBody(body);
-    this->scheduleUpdate();
-    
+//    this->scheduleUpdate();
+
     return true;
 }
 
