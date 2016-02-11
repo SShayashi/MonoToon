@@ -30,7 +30,7 @@ private:
 public:
 
     void shotInk(Character& chara);
-    void drawInk();
+    void drawInk(cocos2d::Sprite *shotink);
     bool removeShotInk(cocos2d::Sprite *ink);
     static cocos2d::Scene* createScene();
     virtual bool init() override;

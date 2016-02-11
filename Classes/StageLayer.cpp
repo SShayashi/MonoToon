@@ -71,20 +71,25 @@ void StageLayer::shotInk(Character &chara){
     auto remove_draw = CallFuncN::create([this](Node *node){
        //NodeをSpriteにダウンキャスト
         auto sprite = dynamic_cast<Sprite*>(node);
-        this->drawInk();
+        this->drawInk(sprite);
         this->removeShotInk(sprite);
         
     });
     //予め作っているアニメーションを連続で呼びだそうとするとエラーが出たので毎回作成する
  
     auto anime = MoveBy::create(0.5, Vec2(60,0));
-    auto sequence = Sequence::create(anime,remove, NULL);
+    auto sequence = Sequence::create(anime,remove_draw, NULL);
     ink->runAction(sequence);
 }
 
 //発射したインクの着地点にインクを塗る処理
-void StageLayer::drawInk(){
-    
+void StageLayer::drawInk(cocos2d::Sprite *shotink){
+    shotink->getTag();
+    //タグから判別
+    //床に同じ色のスプライトを貼る
+    auto tiledink = Sprite::create("ink/ink_brack.png");
+    tiledink->setPosition(shotink->getPosition());
+    addChild(tiledink);
 }
 
 //発射したinkを削除
