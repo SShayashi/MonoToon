@@ -31,8 +31,10 @@ private:
     CC_SYNTHESIZE(cocos2d::Vector<cocos2d::Sprite *>, _drawedInks, DrawedInks);
 
 public:
-
+    
     void shotInk(Character& chara);
+    void detectHitShotInk();
+    void hitShotInk(Sprite *ink, Node *node);
     void drawInk(cocos2d::Sprite *shotink);
     bool removeShotInk(cocos2d::Sprite *ink);
     static cocos2d::Scene* createScene();
