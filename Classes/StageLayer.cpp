@@ -12,13 +12,16 @@ USING_NS_CC;
 
 StageLayer::StageLayer():
 _player(NULL),
-_hudlayer(NULL){
+_hudlayer(NULL),
+_renderTexture(NULL)
+{
     
 }
 
 StageLayer::~StageLayer(){
     CC_SAFE_RELEASE_NULL(_player);
     CC_SAFE_RELEASE_NULL(_hudlayer);
+    CC_SAFE_RELEASE_NULL(_renderTexture);
 }
 bool StageLayer::init()
 {
@@ -26,17 +29,27 @@ bool StageLayer::init()
     {
         return false;
     }
+    winSize = Director::getInstance()->getVisibleSize();
+    
+//    //レンダリング用のテクスチャの初期化
+//    auto renderTexture = RenderTexture::create(winSize.width, winSize.height);
+//    renderTexture->setClearColor(cocos2d::Color4F(0.5,0.5,1,0.5));
+//    renderTexture->setPosition(Vec2(winSize.width/2, winSize.height/2));
+//    _renderTexture = renderTexture;
+//    addChild(_renderTexture);
+
     
     //操作用レイヤの追加
     auto hudlayer = HudLayer::create();
     _hudlayer = hudlayer;
-    addChild(_hudlayer);
+    addChild(_hudlayer,10001);
     
     //プレイヤーの追加
     auto player = Player::create();
     player->setPosition(0,0);
     _player = player;
-    addChild(_player);
+    addChild(_player,10000);
+    
     
     time = 0;
     this->scheduleUpdate();
@@ -48,13 +61,11 @@ void StageLayer::update(float dt)
     time+=dt;
     _hudlayer->updateControl(*_player, dt);
     if(_hudlayer->getbuttonTouchFlag()){
-        if (time > 1){
+        if (time > 0.2){
             shotInk(*_player);
             time = 0;
         }
-    }else{
     }
-
 }
 
 //インクの発射処理
@@ -77,7 +88,7 @@ void StageLayer::shotInk(Character &chara){
     });
     //予め作っているアニメーションを連続で呼びだそうとするとエラーが出たので毎回作成する
  
-    auto anime = MoveBy::create(0.5, Vec2(60,0));
+    auto anime = MoveBy::create(0.4, Vec2(60,0));
     auto sequence = Sequence::create(anime,remove_draw, NULL);
     ink->runAction(sequence);
 }
@@ -87,9 +98,13 @@ void StageLayer::drawInk(cocos2d::Sprite *shotink){
     shotink->getTag();
     //タグから判別
     //床に同じ色のスプライトを貼る
+//    オフスクリーンレンダリングを行うと画面が真っ黒になるバグがあるのでしない
+//    _renderTexture->begin();
     auto tiledink = Sprite::create("ink/ink_brack.png");
     tiledink->setPosition(shotink->getPosition());
     addChild(tiledink);
+//    tiledink->visit();
+//    tiledink->retain();
 }
 
 //発射したinkを削除

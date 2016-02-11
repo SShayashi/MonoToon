@@ -20,13 +20,16 @@ class StageLayer : public cocos2d::Layer
 {
 private:
     float time;
+    Size winSize;
 private:
     StageLayer();
     virtual ~StageLayer();
     CC_SYNTHESIZE_RETAIN(Player*, _player, Player);
     CC_SYNTHESIZE_RETAIN(HudLayer*, _hudlayer, HudLayer);
+    CC_SYNTHESIZE_RETAIN(cocos2d::RenderTexture*, _renderTexture, RenderTexture);
     CC_SYNTHESIZE(cocos2d::Vector<cocos2d::Sprite *>, _shotInks, ShotInks);
     CC_SYNTHESIZE(cocos2d::Vector<cocos2d::Sprite *>, _drawedInks, DrawedInks);
+
 public:
 
     void shotInk(Character& chara);
