@@ -32,12 +32,17 @@ private:
 
 public:
     
+    //発射されたインクに関する関数
     void shotInk(Character& chara);
     void detectHitShotInk();
     void hitShotInk(Sprite *ink, Node *node);
-    void drawInk(cocos2d::Sprite *shotink);
     bool removeShotInk(cocos2d::Sprite *ink);
-    static cocos2d::Scene* createScene();
+    
+    //床に塗られたインクに関する関数
+    void drawInk(cocos2d::Sprite *shotink);
+    void detectContactDrawedInk();
+    void contactDrawedInk(Sprite *drawedink,Node *node);
+    
     virtual bool init() override;
     void update(float dt) override;
     

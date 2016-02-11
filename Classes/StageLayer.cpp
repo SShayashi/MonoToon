@@ -64,8 +64,7 @@ bool StageLayer::init()
     return true;
 }
 
-void StageLayer::update(float dt)
-{
+void StageLayer::update(float dt){
     time+=dt;
     //hudlayerからの入力をキャラに伝える
     _hudlayer->updateControl(*_player, dt);
@@ -77,6 +76,7 @@ void StageLayer::update(float dt)
     }
     
     this->detectHitShotInk();
+    this->detectContactDrawedInk();
 }
 
 //インクの発射処理
@@ -125,9 +125,14 @@ void StageLayer::drawInk(cocos2d::Sprite *shotink){
     //床に同じ色のスプライトを貼る
 //    オフスクリーンレンダリングを行うと画面が真っ黒になるバグがあるのでしない
 //    _renderTexture->begin();
+    // Generate polygon info automatically.
+
+//    auto pinfo = AutoPolygon::generatePolygon("ink/ink_brack.png");
     auto tiledink = Sprite::create("ink/ink_brack.png");
     tiledink->setPosition(shotink->getPosition());
-    addChild(tiledink);
+    this->addChild(tiledink);
+    _drawedInks.pushBack(tiledink);
+    
 //    tiledink->visit();
 //    tiledink->retain();
 }
@@ -166,6 +171,28 @@ void StageLayer::detectHitShotInk(){
     }
 }
 
+/** 床に塗られたinkの当たり判定
+ *
+ */
+void StageLayer::detectContactDrawedInk(){
+    for(auto& drawedink :_drawedInks){
+        auto tag = drawedink->getTag();
+        auto boundingbox = drawedink->getBoundingBox();
+        auto childs = this->getChildren();
+        
+        for(auto& node: childs){
+            //nodeをcharaにダウンキャストして、chara以外を弾く
+            auto chara = dynamic_cast<Character*>(node);
+            if(chara  && tag != node->getTag()){
+                auto chararect = chara->getBoundingBox();
+                bool isHit = chararect.intersectsRect(boundingbox);
+                if(isHit)
+                    this->contactDrawedInk(drawedink , node);
+            }
+        }
+    }
+}
+
 /** インクがあたった時の処理
  * @param ink :当てたink
  * @param node :inkにあたったchara
@@ -173,4 +200,8 @@ void StageLayer::detectHitShotInk(){
 void StageLayer::hitShotInk(cocos2d::Sprite *ink,Node *node){
     //
     this->removeShotInk(ink);
+}
+
+void StageLayer::contactDrawedInk(cocos2d::Sprite *drawedink, cocos2d::Node *node){
+    CCLOG("ON DRAWED INK");
 }

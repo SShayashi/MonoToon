@@ -23,7 +23,7 @@ Player::~Player(){
 
 bool Player::init()
 {
-    if (!Sprite::initWithFile("character/chara001.png")) {
+    if (!Sprite::initWithFile("character/chara003.png")) {
         return false;
     }
     
