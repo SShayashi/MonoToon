@@ -451,10 +451,18 @@
 			children = (
 				7962F8061C6B61FD00E425B2 /* Character.cpp */,
 				7962F8071C6B61FD00E425B2 /* Character.hpp */,
+				7962F8151C6C2A3200E425B2 /* Player */,
+			);
+			name = Characters;
+			sourceTree = "<group>";
+		};
+		7962F8151C6C2A3200E425B2 /* Player */ = {
+			isa = PBXGroup;
+			children = (
 				7962F8091C6B634F00E425B2 /* Player.cpp */,
 				7962F80A1C6B634F00E425B2 /* Player.hpp */,
 			);
-			name = Characters;
+			name = Player;
 			sourceTree = "<group>";
 		};
 		79715DAD1C640B1A00E8AFF2 /* sqlite */ = {
