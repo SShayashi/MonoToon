@@ -167,7 +167,8 @@ void StageLayer::detectHitShotInk(){
 }
 
 /** インクがあたった時の処理
- *
+ * @param ink :当てたink
+ * @param node :inkにあたったchara
  */
 void StageLayer::hitShotInk(cocos2d::Sprite *ink,Node *node){
     //
