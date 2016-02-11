@@ -41,7 +41,7 @@ bool Player::init()
     
     setTag((int)Helper::CHARA::PLAYER);
     setSpeed(PLAYER_SPEED_DEFAULT);
-    setAngle(Helper::ANGLE8::BOTTOM_CENTER);
+//    setDirectionalVec(Vec2(0,-1));
     
     auto ink = Sprite::create("ink/jet.png");
     setInk(ink);

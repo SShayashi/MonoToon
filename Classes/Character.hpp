@@ -30,7 +30,7 @@ protected:
     CC_SYNTHESIZE_RETAIN(cocos2d::Sprite*, _ink,Ink);
     
     //角度・スピード
-    CC_SYNTHESIZE(Helper::ANGLE8, _angle, Angle);
+    CC_SYNTHESIZE(Vec2, _directionalVec, DirectionalVec);
     CC_SYNTHESIZE(float , _oldSpeed, OldSpeed);
     CC_SYNTHESIZE(float , _speed, Speed);
     CC_SYNTHESIZE(cocos2d::Vector<cocos2d::SpriteFrame *> , _frames, Frames);

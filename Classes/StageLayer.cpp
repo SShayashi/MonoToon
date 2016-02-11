@@ -7,7 +7,7 @@
 //
 
 #include "StageLayer.hpp"
-
+#define SHOT_INTERBAL 0.2
 USING_NS_CC;
 
 StageLayer::StageLayer():
@@ -50,7 +50,6 @@ bool StageLayer::init()
     _player = player;
     addChild(_player,10000);
     
-    
     time = 0;
     this->scheduleUpdate();
     return true;
@@ -61,7 +60,7 @@ void StageLayer::update(float dt)
     time+=dt;
     _hudlayer->updateControl(*_player, dt);
     if(_hudlayer->getbuttonTouchFlag()){
-        if (time > 0.2){
+        if (time > SHOT_INTERBAL){
             shotInk(*_player);
             time = 0;
         }
@@ -86,9 +85,11 @@ void StageLayer::shotInk(Character &chara){
         this->removeShotInk(sprite);
         
     });
+    
     //予め作っているアニメーションを連続で呼びだそうとするとエラーが出たので毎回作成する
- 
-    auto anime = MoveBy::create(0.4, Vec2(60,0));
+    //キャラの向きによって射出する方向を変える
+    auto shotVec = chara.getDirectionalVec()*60;
+    auto anime = MoveBy::create(0.4, shotVec);
     auto sequence = Sequence::create(anime,remove_draw, NULL);
     ink->runAction(sequence);
 }

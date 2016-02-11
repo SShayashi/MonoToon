@@ -1,6 +1,7 @@
 #include "AppDelegate.h"
 #include "HelloWorldScene.h"
 #include "GameScene.hpp"
+#include "Helper.hpp"
 USING_NS_CC;
 
 AppDelegate::AppDelegate() {
@@ -40,6 +41,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->setAnimationInterval(1.0 / 60);
 
     FileUtils::getInstance()->addSearchPath("res");
+
+    //ヘルパークラスを初期化
+    Helper::getInstance()->getInstance();
 
     // create a scene. it's an autorelease object
 //    auto scene = HelloWorld::createScene();
