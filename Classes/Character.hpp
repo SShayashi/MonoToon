@@ -11,13 +11,16 @@
 
 #include <stdio.h>
 #include "cocos2d.h"
-
+#include "Helper.hpp"
 
 class Character :public cocos2d::Sprite
 {
 protected:
     Character();
     virtual ~Character();
+    //以下メンバ変数
+    
+    //キャラのアニメーション用メンバ
     char fileName[128] = {0};
     cocos2d::Rect rect;
     cocos2d::SpriteFrame *_frame;
@@ -26,6 +29,12 @@ protected:
     CC_SYNTHESIZE_RETAIN(cocos2d::Sequence*, _shotMovement,ShotMovement);
     CC_SYNTHESIZE_RETAIN(cocos2d::Sprite*, _ink,Ink);
     
+    //角度・スピード
+    CC_SYNTHESIZE(Helper::ANGLE8, _angle, Angle);
+    CC_SYNTHESIZE(float , _oldSpeed, OldSpeed);
+    CC_SYNTHESIZE(float , _speed, Speed);
+    CC_SYNTHESIZE(cocos2d::Vector<cocos2d::SpriteFrame *> , _frames, Frames);
+
 public:
     
     void doMove(cocos2d::Vec2 velocity);
@@ -33,10 +42,6 @@ public:
     bool init() override;
 //    void update(float dt) override;
     //    CC_SYNTHESIZE_PASS_BY_REF(cocos2d::Vec2, _acceleration, Acceleration);
-    CC_SYNTHESIZE(float , _oldSpeed, OldSpeed);
-    CC_SYNTHESIZE(float , _speed, Speed);
-
-    CC_SYNTHESIZE(cocos2d::Vector<cocos2d::SpriteFrame *> , _frames, Frames);
     CREATE_FUNC(Character);
 };
 
