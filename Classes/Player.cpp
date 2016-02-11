@@ -39,13 +39,14 @@ bool Player::init()
 //    }
 //    this->setAnimation();
     
-    setTag(1);
+    setTag((int)Helper::CHARA::PLAYER);
     setSpeed(PLAYER_SPEED_DEFAULT);
+    setAngle(Helper::ANGLE8::BOTTOM_CENTER);
+    
     auto ink = Sprite::create("ink/jet.png");
     setInk(ink);
     
     auto move = MoveBy::create(2, Vec2(40, 0 ));
-    
     auto sequence = Sequence::create(move, NULL);
     setShotMovement(sequence);
     

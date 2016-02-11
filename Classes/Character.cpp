@@ -42,7 +42,7 @@ bool Character::init()
 //    }
 ////    this->setAnimation();
 //    this->scheduleUpdate();
-
+    setAngle(Helper::ANGLE8::BOTTOM_CENTER);
     return true;
 }
 

@@ -21,7 +21,15 @@ private:
     static Helper* mHelper;
 public:
     //ゲーム内で利用する共用体
-
+    
+    //キャラの種類
+    enum class CHARA{
+        PLAYER,
+        ENEMY,
+        ENEMY_PLAYER,
+        COUNT
+    };
+    
     /** 方向
      *789
      *456
