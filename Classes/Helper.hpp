@@ -22,6 +22,24 @@ private:
 public:
     //ゲーム内で利用する共用体
 
+    /** 方向
+     *789
+     *456
+     *123
+     */
+    enum class ANGLE8{
+        BOTTOM_LEFT,
+        BOTTOM_CENTER,
+        BOTTOM_RIGHT,
+        MIDDLE_LEFT,
+        MIDDLE_CENTER,
+        MIDDLE_RIGHT,
+        TOPLEFT,
+        TOPCENTERM,
+        TOPRIGHT
+    };
+
+    
     //インクの種類
     enum class ShotInkType
     {
