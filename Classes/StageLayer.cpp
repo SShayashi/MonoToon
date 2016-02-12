@@ -32,12 +32,12 @@ bool StageLayer::init()
     }
     winSize = Director::getInstance()->getVisibleSize();
     
-//    //レンダリング用のテクスチャの初期化
-//    auto renderTexture = RenderTexture::create(winSize.width, winSize.height);
-//    renderTexture->setClearColor(cocos2d::Color4F(0.5,0.5,1,0.5));
-//    renderTexture->setPosition(Vec2(winSize.width/2, winSize.height/2));
-//    _renderTexture = renderTexture;
-//    addChild(_renderTexture);
+    //レンダリング用のテクスチャの初期化
+    auto renderTexture = RenderTexture::create(winSize.width, winSize.height);
+//    renderTexture->setClearColor(cocos2d::Color4F(0,0,1,0.5));
+    renderTexture->setPosition(Vec2(winSize.width/2, winSize.height/2));
+    _renderTexture = renderTexture;
+    addChild(_renderTexture);
 
     
     //操作用レイヤの追加
@@ -124,17 +124,17 @@ void StageLayer::drawInk(cocos2d::Sprite *shotink){
     //タグから判別
     //床に同じ色のスプライトを貼る
 //    オフスクリーンレンダリングを行うと画面が真っ黒になるバグがあるのでしない
-//    _renderTexture->begin();
-    // Generate polygon info automatically.
-
-//    auto pinfo = AutoPolygon::generatePolygon("ink/ink_brack.png");
+    _renderTexture->begin();
+ 
+    //auto polygonでやるにはphisicsbodyを使う必要がある。
+    //auto pinfo = AutoPolygon::generatePolygon("ink/ink_brack.png");
     auto tiledink = Sprite::create("ink/ink_brack.png");
     tiledink->setPosition(shotink->getPosition());
-    this->addChild(tiledink);
+//    this->addChild(tiledink);
     _drawedInks.pushBack(tiledink);
-    
-//    tiledink->visit();
-//    tiledink->retain();
+    tiledink->visit();
+    _renderTexture->end();
+    tiledink->retain();
 }
 
 //発射したinkを削除
