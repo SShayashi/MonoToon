@@ -138,6 +138,9 @@ void GameScene::update(float dt){
 
 
 bool GameScene::judgeGame(){
+    Node players;
+    Node enemys;
+    _stagelayer->getChildren();
     return false;
 }
 

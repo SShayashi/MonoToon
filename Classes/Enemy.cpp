@@ -7,7 +7,7 @@
 //
 
 #include "Enemy.hpp"
-#define Enemy_SPEED_DEFAULT 2
+#define Enemy_SPEED_DEFAULT 0.5
 #define ENEMY_SHOT_RATE 120
 Enemy::Enemy()
 {

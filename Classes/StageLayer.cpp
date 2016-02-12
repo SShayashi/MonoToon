@@ -84,9 +84,10 @@ void StageLayer::update(float dt){
     if(rand() % (ADD_ENEMEY_RATE-Helper::getInstance()->_gameLevel*5) == 0){
         this->addEnemy();
     }
-
     this->moveEnemy();
     this->shotEnemy();
+    
+    //インクが全く同じ位置に重なっているものは削除していく
 }
 
 //インクの発射処理
@@ -143,8 +144,10 @@ void StageLayer::drawInk(cocos2d::Sprite *shotink){
         tiledink = Sprite::create("ink/ink_brack.png");
     else if(shotink->getTag() == (int)Helper::CHARA::ENEMY)
         tiledink = Sprite::create("ink/ink_white.png");
-        
+    auto pos = shotink->getPosition();
+    this->removeSamePositionDrawedInk(&pos);
     tiledink->setPosition(shotink->getPosition());
+    
     _drawedInks.pushBack(tiledink);
     tiledink->visit();
     _renderTexture->end();
@@ -239,6 +242,7 @@ void StageLayer::moveEnemy(){
         auto delt = p_pos - e_pos;
         delt.normalize();
         enemy->doMove(delt * enemy->getSpeed());
+        enemy->setDirectionalVec(delt);
         
     }
 }
@@ -248,6 +252,16 @@ void StageLayer::shotEnemy(){
         auto shotrate = rand() % (int)enemy->getShotRate();
         if(shotrate == 0){
             this->shotInk(*enemy);
+        }
+    }
+}
+
+//位置が全く同じインクは削除
+void StageLayer::removeSamePositionDrawedInk(cocos2d::Vec2 *position){
+    for(auto &drawedink: _drawedInks){
+        if(drawedink->getPosition() == *position){
+            _drawedInks.eraseObject(drawedink);
+            drawedink->removeFromParent();
         }
     }
 }

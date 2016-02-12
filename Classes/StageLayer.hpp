@@ -44,6 +44,7 @@ public:
     void drawInk(cocos2d::Sprite *shotink);
     void detectContactDrawedInk();
     void contactDrawedInk(Sprite *drawedink,Node *node);
+    void removeSamePositionDrawedInk(Vec2* position);
     
     //敵の追加処理
     void addEnemy();
