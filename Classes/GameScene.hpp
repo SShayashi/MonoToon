@@ -22,9 +22,26 @@ private:
     ~GameScene();
     CC_SYNTHESIZE_RETAIN(StageLayer*, _stagelayer, StageLayer);
 public:
+    enum class GameState
+    {
+        READY,
+        PLAYING,
+        PAUSE,
+        SYURABA,
+        ENDING,
+        LOSE,
+        CLEAR,
+    };
     
+    /* 制限時間用変数　*/
+    CC_SYNTHESIZE(float, _second, Second);
+    /* 現在のゲーム状態 */
+    CC_SYNTHESIZE(GameState, _state, State);
+    /* 制限時間用ラベル */
+    CC_SYNTHESIZE_RETAIN(cocos2d::Label*, _secondLabel, SecondLabel);
 
-    
+    void onEnterTransitionDidFinish();
+    void addReadyLabel();
     static cocos2d::Scene* createScene();
     void update(float dt)override;
     virtual bool init()override;
