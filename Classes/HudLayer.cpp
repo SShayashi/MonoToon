@@ -143,12 +143,10 @@ void HudLayer::onTouchesEnded(const std::vector<Touch *> &touches, cocos2d::Even
 void HudLayer::updateControl(Player& player ,float dt){
     //キャラの移動
     auto movement = _virPad->getMovent();
-    auto velocity = movement * player.getSpeed();
-    player.doMove(velocity);
-    
+    movement.normalize();
+    player.doMove(movement * player.getSpeed());
     
     //キャラの向きを保存
-    movement.normalize();
     if(movement != Vec2::ZERO){
         player.setDirectionalVec(movement);
     }
