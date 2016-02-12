@@ -53,11 +53,12 @@ bool StageLayer::init()
     
     
     //デバッグ用に敵キャラの追加
-    auto enemy = Character::create();
+    auto enemy = Enemy::create();
     enemy->setTag((int)Helper::CHARA::ENEMY);
     enemy->setTexture("character/enemy/picocassette_sozai_41.png");
     enemy->setPosition(Vec2(500,500));
     addChild(enemy);
+    _enemys.pushBack(enemy);
     
     time = 0;
     this->scheduleUpdate();
@@ -74,9 +75,12 @@ void StageLayer::update(float dt){
             time = 0;
         }
     }
-    
+    //インクの当たり判定
     this->detectHitShotInk();
     this->detectContactDrawedInk();
+    
+    //敵の動き
+    this->moveEnemy();
 }
 
 //インクの発射処理
@@ -203,4 +207,27 @@ void StageLayer::hitShotInk(cocos2d::Sprite *ink,Node *node){
 
 void StageLayer::contactDrawedInk(cocos2d::Sprite *drawedink, cocos2d::Node *node){
     CCLOG("ON DRAWED INK");
+}
+
+void StageLayer::addEnemy(){
+    auto enemy = Enemy::create();
+    auto pos = rand() % (int)winSize.height;
+    
+    //とりあえず画面の右端に敵を追加していく
+    enemy->setPosition(Vec2(winSize.width,pos));
+    addChild(enemy);
+    _enemys.pushBack(enemy);
+}
+
+//敵を動かす
+void StageLayer::moveEnemy(){
+    for(auto &enemy: _enemys){
+        
+        auto e_pos = enemy->getPosition();
+        auto p_pos = _player->getPosition();
+        auto delt = p_pos - e_pos;
+        delt.normalize();
+        enemy->doMove(delt * enemy->getSpeed());
+        
+    }
 }

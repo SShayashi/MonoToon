@@ -14,6 +14,7 @@
 #include "Player.hpp"
 #include "HudLayer.hpp"
 #include "Character.hpp"
+#include "Enemy.hpp"
 
 USING_NS_CC;
 class StageLayer : public cocos2d::Layer
@@ -29,6 +30,7 @@ private:
     CC_SYNTHESIZE_RETAIN(cocos2d::RenderTexture*, _renderTexture, RenderTexture);
     CC_SYNTHESIZE(cocos2d::Vector<cocos2d::Sprite *>, _shotInks, ShotInks);
     CC_SYNTHESIZE(cocos2d::Vector<cocos2d::Sprite *>, _drawedInks, DrawedInks);
+    CC_SYNTHESIZE(cocos2d::Vector<Enemy *>, _enemys, Enemys);
 
 public:
     
@@ -42,6 +44,11 @@ public:
     void drawInk(cocos2d::Sprite *shotink);
     void detectContactDrawedInk();
     void contactDrawedInk(Sprite *drawedink,Node *node);
+    
+    //敵の追加処理
+    void addEnemy();
+    void moveEnemy();
+    
     
     virtual bool init() override;
     void update(float dt) override;
