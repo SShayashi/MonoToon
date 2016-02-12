@@ -4,7 +4,7 @@
     <Group ctype="ResourceGroup">
       <RootFolder Name=".">
         <Image Name="HelloWorld.png" />
-        <Project Name="MainScene.csd" Type="Scene" />
+        <Project Name="TitleScene.csd" Type="Scene" />
         <TTF Name="PixelMplus12-Regular.ttf" />
         <Image Name="tile.png" />
       </RootFolder>
