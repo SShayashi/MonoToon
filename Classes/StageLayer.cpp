@@ -130,7 +130,6 @@ void StageLayer::drawInk(cocos2d::Sprite *shotink){
     //auto pinfo = AutoPolygon::generatePolygon("ink/ink_brack.png");
     auto tiledink = Sprite::create("ink/ink_brack.png");
     tiledink->setPosition(shotink->getPosition());
-//    this->addChild(tiledink);
     _drawedInks.pushBack(tiledink);
     tiledink->visit();
     _renderTexture->end();
