@@ -8,7 +8,7 @@
 
 #include "Enemy.hpp"
 #define Enemy_SPEED_DEFAULT 2
-#define ENEMY_SHOT_RATE 60
+#define ENEMY_SHOT_RATE 120
 Enemy::Enemy()
 {
     
@@ -50,6 +50,7 @@ bool Enemy::init()
     this->setPhysicsBody(body);
     
     setTag((int)Helper::CHARA::ENEMY);
+    _shotRate = ENEMY_SHOT_RATE;
     setSpeed(Enemy_SPEED_DEFAULT);
     //    setDirectionalVec(Vec2(0,-1));
     

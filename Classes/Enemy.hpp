@@ -19,7 +19,7 @@ class Enemy :public Character
 protected:
     Enemy();
     virtual ~Enemy();
-    
+    CC_SYNTHESIZE(int , _shotRate, ShotRate);
 public:
     bool init() override;
     void update(float dt) override;

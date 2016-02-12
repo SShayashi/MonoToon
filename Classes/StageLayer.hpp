@@ -48,7 +48,7 @@ public:
     //敵の追加処理
     void addEnemy();
     void moveEnemy();
-    
+    void shotEnemy();
     
     virtual bool init() override;
     void update(float dt) override;

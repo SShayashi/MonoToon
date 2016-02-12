@@ -46,6 +46,7 @@ bool Character::init()
     
     
     setDirectionalVec(Vec2(0, -1));
+    setShotDistance(60);
     return true;
 }
 

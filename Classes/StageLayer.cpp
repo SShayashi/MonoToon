@@ -86,6 +86,7 @@ void StageLayer::update(float dt){
     }
 
     this->moveEnemy();
+    this->shotEnemy();
 }
 
 //インクの発射処理
@@ -121,7 +122,7 @@ void StageLayer::shotInk(Character &chara){
     /*予め作っているアニメーションを連続で呼びだそうとするとエラーが出たので毎回作成する
      *キャラの向きによって射出する方向を変える
      */
-    auto shotVec = chara.getDirectionalVec()*60;
+    auto shotVec = chara.getDirectionalVec()*chara.getShotDistance();
     auto anime = MoveBy::create(0.4, shotVec);
     auto sequence = Sequence::create(anime,remove_draw, NULL);
     ink->runAction(sequence);
@@ -129,7 +130,7 @@ void StageLayer::shotInk(Character &chara){
 
 //発射したインクの着地点にインクを塗る処理
 void StageLayer::drawInk(cocos2d::Sprite *shotink){
-    shotink->getTag();
+
     //タグから判別
     //床に同じ色のスプライトを貼る
 //    オフスクリーンレンダリングを行うと画面が真っ黒になるバグがあるのでしない
@@ -137,7 +138,12 @@ void StageLayer::drawInk(cocos2d::Sprite *shotink){
  
     //auto polygonでやるにはphisicsbodyを使う必要がある。
     //auto pinfo = AutoPolygon::generatePolygon("ink/ink_brack.png");
-    auto tiledink = Sprite::create("ink/ink_brack.png");
+    Sprite* tiledink;
+    if(shotink->getTag() == (int)Helper::CHARA::PLAYER)
+        tiledink = Sprite::create("ink/ink_brack.png");
+    else if(shotink->getTag() == (int)Helper::CHARA::ENEMY)
+        tiledink = Sprite::create("ink/ink_white.png");
+        
     tiledink->setPosition(shotink->getPosition());
     _drawedInks.pushBack(tiledink);
     tiledink->visit();
@@ -234,5 +240,14 @@ void StageLayer::moveEnemy(){
         delt.normalize();
         enemy->doMove(delt * enemy->getSpeed());
         
+    }
+}
+
+void StageLayer::shotEnemy(){
+    for(auto &enemy: _enemys){
+        auto shotrate = rand() % (int)enemy->getShotRate();
+        if(shotrate == 0){
+            this->shotInk(*enemy);
+        }
     }
 }

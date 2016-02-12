@@ -115,8 +115,35 @@ void GameScene::update(float dt){
         _second -= dt;
     }else if (_state == GameState::READY){
         _second = TIME_LIMIT_SECOND;
+    }else if(_state == GameState::ENDING){
+        _second = 0;
+        if(this->judgeGame()){
+            this->onClear();
+        }else{
+            this->onLose();
+        }
+            
     }
+    
     /* 表示の更新 */
     int second = static_cast<int>(_second);
     _secondLabel->setString(StringUtils::toString(second));
+    
+    if(_second <= 0 ){
+
+        _state = GameState::ENDING;
+    }
+
+}
+
+
+bool GameScene::judgeGame(){
+    return false;
+}
+
+void GameScene::onClear(){
+    Helper::getInstance()->_gameLevel++;
+}
+void GameScene::onLose(){
+    Helper::getInstance()->_gameLevel = 1;
 }

@@ -44,6 +44,11 @@ public:
 
     void onEnterTransitionDidFinish() override;
     void addReadyLabel();
+    void onEnding();
+    void onClear();
+    void onLose();
+    bool judgeGame();
+    
     static cocos2d::Scene* createScene();
     void update(float dt)override;
     virtual bool init()override;
