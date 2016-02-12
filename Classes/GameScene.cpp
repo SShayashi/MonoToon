@@ -10,15 +10,19 @@
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
 
+/* 制限時間 */
+const float TIME_LIMIT_SECOND = 20;
 USING_NS_CC;
 using namespace cocostudio::timeline;
 GameScene::GameScene():
 _state(GameState::READY),
- _secondLabel(NULL)
+_secondLabel(NULL),
+_second(TIME_LIMIT_SECOND)
 {
     
 }
 GameScene::~GameScene(){
+    CC_SAFE_RELEASE_NULL(_secondLabel);
 }
 
 Scene* GameScene::createScene()
@@ -44,7 +48,7 @@ bool GameScene::init()
     {
         return false;
     }
-    
+    winSize = Director::getInstance()->getWinSize();
     auto rootNode = CSLoader::createNode("MainScene.csb");
     addChild(rootNode);
     
@@ -52,8 +56,13 @@ bool GameScene::init()
     _stagelayer = stagelayer;
     addChild(_stagelayer);
     
-    this->scheduleUpdate();
+    int second = static_cast<int>(_second);
+    _secondLabel = Label::createWithSystemFont(StringUtils::toString(second), "../fonts/misaki.ttf", 64);
+    _secondLabel->setPosition(Vec2(winSize.width /2.0 , winSize.height -70));
+    _secondLabel->setColor(Color3B::GRAY);
+    addChild(_secondLabel);
     
+    this->scheduleUpdate();
     return true;
 }
 
@@ -62,20 +71,13 @@ void GameScene::onEnterTransitionDidFinish()
     _stagelayer->unscheduleUpdate();
     // シーン遷移が完了したとき
     Layer::onEnterTransitionDidFinish();
-    
-    // 2秒後にラムダ式を実行
-    this->runAction(Sequence::create(DelayTime::create(1),CallFunc::create([this](){
-        _stagelayer->scheduleUpdate();
-    }), NULL));
-    
-    addReadyLabel();
-
-
+    this->addReadyLabel();
     
 }
 void GameScene::addReadyLabel()
 {
-    auto winSize = Director::getInstance()->getWinSize();
+    //プレイ状態をreadyに
+    _state = GameState::READY;
     auto center = Vec2(winSize.width / 2.0, winSize.height / 2.0);
     
     // Readyの文字を定義する
@@ -86,7 +88,7 @@ void GameScene::addReadyLabel()
     
     // STARTの文字を定義する
     auto start = Sprite::create("start.png");
-    start->runAction(Sequence::create(CCSpawn::create(EaseIn::create(ScaleTo::create(0.5, 5.0), 0.5),
+    start->runAction(Sequence::create(Spawn::create(EaseIn::create(ScaleTo::create(0.5, 5.0), 0.5),
                                                       FadeOut::create(0.5),
                                                       NULL), // 0.5秒かけて拡大とフェードアウトを同時に行う
                                       RemoveSelf::create(), // 自分を削除する
@@ -99,6 +101,7 @@ void GameScene::addReadyLabel()
                                       CallFunc::create([this, start] { // ラムダの中でthisとstart変数を使っているのでキャプチャに加える
         this->addChild(start); // 「スタート」のラベルを追加する（この時点でスタートのアニメーションが始まる）
         _state = GameState::PLAYING; // ゲーム状態をPLAYINGに切り替える
+        this->_stagelayer->scheduleUpdate();
         // BGMを鳴らす
     }),
                                       RemoveSelf::create(), // 自分を削除する
@@ -107,4 +110,13 @@ void GameScene::addReadyLabel()
 
 
 void GameScene::update(float dt){
+    /* 残り時間を減らす */
+    if(_state == GameState::PLAYING){
+        _second -= dt;
+    }else if (_state == GameState::READY){
+        _second = TIME_LIMIT_SECOND;
+    }
+    /* 表示の更新 */
+    int second = static_cast<int>(_second);
+    _secondLabel->setString(StringUtils::toString(second));
 }

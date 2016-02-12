@@ -31,7 +31,7 @@ private:
     CC_SYNTHESIZE(cocos2d::Vector<cocos2d::Sprite *>, _shotInks, ShotInks);
     CC_SYNTHESIZE(cocos2d::Vector<cocos2d::Sprite *>, _drawedInks, DrawedInks);
     CC_SYNTHESIZE(cocos2d::Vector<Enemy *>, _enemys, Enemys);
-    CC_SYNTHESIZE(int, _level, Level);
+
 public:
     
     //発射されたインクに関する関数
@@ -51,26 +51,10 @@ public:
     
     
     virtual bool init() override;
-    bool initWithLevel(int level);
     void update(float dt) override;
     
-    //くりえいと時にレベルを渡せるように修正
-    static StageLayer* create(int level)
-    {
-        StageLayer *pRet = new(std::nothrow) StageLayer();
-        if (pRet && pRet->initWithLevel(level))
-        {
-            pRet->autorelease();
-            return pRet;
-        }
-        else
-        {
-            delete pRet;
-            pRet = nullptr;
-            return nullptr;
-        }
-    }
-
+    CREATE_FUNC(StageLayer);
+    
 };
 
 

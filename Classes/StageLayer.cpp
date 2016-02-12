@@ -15,8 +15,7 @@ USING_NS_CC;
 StageLayer::StageLayer():
 _player(NULL),
 _hudlayer(NULL),
-_renderTexture(NULL),
-_level(0)
+_renderTexture(NULL)
 {
     
 }
@@ -26,18 +25,14 @@ StageLayer::~StageLayer(){
     CC_SAFE_RELEASE_NULL(_hudlayer);
     CC_SAFE_RELEASE_NULL(_renderTexture);
 }
-bool StageLayer::initWithLevel(int level)
+bool StageLayer::init()
 {
     if ( !Layer::init() )
     {
         return false;
     }
-    if(level == 0){
-        return false;
-    }
     
     winSize = Director::getInstance()->getVisibleSize();
-    _level = level;
     //レンダリング用のテクスチャの初期化
     auto renderTexture = RenderTexture::create(winSize.width, winSize.height);
 //    renderTexture->setClearColor(cocos2d::Color4F(0,0,1,0.5));
@@ -86,7 +81,7 @@ void StageLayer::update(float dt){
     this->detectContactDrawedInk();
     
     //敵の動き
-    if(rand() % ADD_ENEMEY_RATE == 0){
+    if(rand() % (ADD_ENEMEY_RATE-Helper::getInstance()->_gameLevel*5) == 0){
         this->addEnemy();
     }
 

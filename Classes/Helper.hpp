@@ -76,7 +76,7 @@ public:
     static Helper* getInstance();
     
     // ゲーム全体で使用したい変数
-
+    int _gameLevel;
     // 値の初期化
     void initialize();
     

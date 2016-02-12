@@ -30,5 +30,5 @@ Helper* Helper::getInstance()
 // 値の初期化
 void Helper::initialize()
 {
-    
+    _gameLevel = 0;
 }

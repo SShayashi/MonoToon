@@ -13,6 +13,7 @@
 #include "cocos2d.h"
 #include "HudLayer.hpp"
 #include "StageLayer.hpp"
+#include "Helper.hpp"
 
 USING_NS_CC;
 class GameScene : public cocos2d::Layer
@@ -22,6 +23,7 @@ private:
     ~GameScene();
     CC_SYNTHESIZE_RETAIN(StageLayer*, _stagelayer, StageLayer);
 public:
+    Size winSize;
     enum class GameState
     {
         READY,
@@ -40,7 +42,7 @@ public:
     /* 制限時間用ラベル */
     CC_SYNTHESIZE_RETAIN(cocos2d::Label*, _secondLabel, SecondLabel);
 
-    void onEnterTransitionDidFinish();
+    void onEnterTransitionDidFinish() override;
     void addReadyLabel();
     static cocos2d::Scene* createScene();
     void update(float dt)override;
