@@ -138,13 +138,25 @@ void GameScene::update(float dt){
 
 
 bool GameScene::judgeGame(){
-    return true;
+
     int players=0;
     int enemys =0;
     auto childs = _stagelayer->getChildren();
     for(auto node : childs){
-        
+        if(node->getTag() == (int)Helper::CHARA::PLAYER){
+            players++;
+        }else if(node->getTag() == (int)Helper::CHARA::ENEMY){
+            enemys++;
+        }else{
+            
+        }
     }
+    
+    if(players >= enemys)
+        return true;
+    else
+        return false;
+    
     return false;
 }
 
