@@ -250,6 +250,7 @@ void StageLayer::moveEnemy(){
 void StageLayer::shotEnemy(){
     for(auto &enemy: _enemys){
         auto shotrate = rand() % (int)enemy->getShotRate();
+        
         if(shotrate == 0){
             this->shotInk(*enemy);
         }

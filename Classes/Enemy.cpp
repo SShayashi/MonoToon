@@ -52,6 +52,7 @@ bool Enemy::init()
     setTag((int)Helper::CHARA::ENEMY);
     _shotRate = ENEMY_SHOT_RATE;
     setSpeed(Enemy_SPEED_DEFAULT);
+    setShotDistance(60);
     //    setDirectionalVec(Vec2(0,-1));
     
     auto ink = Sprite::create("ink/jet.png");
