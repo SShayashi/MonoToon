@@ -8,6 +8,7 @@
         <TTF Name="PixelMplus12-Regular.ttf" />
         <Image Name="tile.png" />
         <Project Name="LoseModal.csd" Type="Layer" />
+        <Project Name="WinModal.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

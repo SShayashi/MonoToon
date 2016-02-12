@@ -71,6 +71,8 @@
 		79715DB41C640B9800E8AFF2 /* Helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79715DB21C640B9800E8AFF2 /* Helper.cpp */; };
 		79BF74F21C672C9A00E3B8EC /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79BF74F01C672C9A00E3B8EC /* GameScene.cpp */; };
 		79BF74F91C67376400E3B8EC /* VirtualPad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79BF74F71C67376400E3B8EC /* VirtualPad.cpp */; };
+		79CF38401C6DDF0300928406 /* WinModal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79CF383E1C6DDF0300928406 /* WinModal.cpp */; };
+		79CF38431C6DDF1000928406 /* LoseModal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79CF38411C6DDF1000928406 /* LoseModal.cpp */; };
 		7AB54498A0DE9601BEA9EC50 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1684B5D95625F6CDB3EE536 /* AdSupport.framework */; };
 		8262943E1AAF051F00CB7CF7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8262943D1AAF051F00CB7CF7 /* Security.framework */; };
 		89714F4C9FF3108FF3237358 /* sdkbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14AC4504B79AC56570D5639A /* sdkbox.framework */; };
@@ -194,6 +196,10 @@
 		79BF74F11C672C9A00E3B8EC /* GameScene.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GameScene.hpp; sourceTree = "<group>"; };
 		79BF74F71C67376400E3B8EC /* VirtualPad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VirtualPad.cpp; sourceTree = "<group>"; };
 		79BF74F81C67376400E3B8EC /* VirtualPad.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VirtualPad.hpp; sourceTree = "<group>"; };
+		79CF383E1C6DDF0300928406 /* WinModal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WinModal.cpp; sourceTree = "<group>"; };
+		79CF383F1C6DDF0300928406 /* WinModal.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = WinModal.hpp; sourceTree = "<group>"; };
+		79CF38411C6DDF1000928406 /* LoseModal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LoseModal.cpp; sourceTree = "<group>"; };
+		79CF38421C6DDF1000928406 /* LoseModal.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = LoseModal.hpp; sourceTree = "<group>"; };
 		8262943D1AAF051F00CB7CF7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		91E44A67B79542558F456EC2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
 		AA1C4B909D0C77EB39D211EA /* PluginGoogleAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PluginGoogleAnalytics.framework; sourceTree = SOURCE_ROOT; };
@@ -431,6 +437,7 @@
 		7962F8001C6B5A7A00E425B2 /* Layers */ = {
 			isa = PBXGroup;
 			children = (
+				79CF383D1C6DDEE500928406 /* ModalLayes */,
 				7962F8011C6B5ACA00E425B2 /* HudLayer.cpp */,
 				7962F8021C6B5ACA00E425B2 /* HudLayer.hpp */,
 				7962F80F1C6B99BE00E425B2 /* StageLayer.cpp */,
@@ -486,6 +493,17 @@
 				79715DB01C640B1A00E8AFF2 /* sqlite3ext.h */,
 			);
 			path = sqlite;
+			sourceTree = "<group>";
+		};
+		79CF383D1C6DDEE500928406 /* ModalLayes */ = {
+			isa = PBXGroup;
+			children = (
+				79CF383E1C6DDF0300928406 /* WinModal.cpp */,
+				79CF383F1C6DDF0300928406 /* WinModal.hpp */,
+				79CF38411C6DDF1000928406 /* LoseModal.cpp */,
+				79CF38421C6DDF1000928406 /* LoseModal.hpp */,
+			);
+			name = ModalLayes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -643,10 +661,12 @@
 				46880B8A19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				7962F80E1C6B8FFA00E425B2 /* HomeScene.cpp in Sources */,
+				79CF38401C6DDF0300928406 /* WinModal.cpp in Sources */,
 				79715DB41C640B9800E8AFF2 /* Helper.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				7962F80B1C6B634F00E425B2 /* Player.cpp in Sources */,
 				79BF74F21C672C9A00E3B8EC /* GameScene.cpp in Sources */,
+				79CF38431C6DDF1000928406 /* LoseModal.cpp in Sources */,
 				7962F8191C6CE50000E425B2 /* Enemy.cpp in Sources */,
 				7962F8081C6B61FD00E425B2 /* Character.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
