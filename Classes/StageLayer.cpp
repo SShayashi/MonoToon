@@ -8,6 +8,7 @@
 
 #include "StageLayer.hpp"
 #define SHOT_INTERBAL 0.2
+#define ADD_ENEMEY_RATE 120
 #define PI 3.141592653589793
 USING_NS_CC;
 
@@ -80,6 +81,10 @@ void StageLayer::update(float dt){
     this->detectContactDrawedInk();
     
     //敵の動き
+    if(rand() % ADD_ENEMEY_RATE == 0){
+        this->addEnemy();
+    }
+
     this->moveEnemy();
 }
 

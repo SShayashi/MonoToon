@@ -21,9 +21,17 @@ GameScene::~GameScene(){
 
 Scene* GameScene::createScene()
 {
-    auto scene = Scene::create();
+    /* 物理エンジンを有効にしたシーンを作成 */
+    auto scene = Scene::createWithPhysics();
+    auto world = scene->getPhysicsWorld();
+    world->setGravity(Vec2::ZERO);
+    /* デバッグビルドのとき */
+    /* 物理空間にデバッグ用の表示を追加する */
+    world -> setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+    
     auto layer = GameScene::create();
     scene->addChild(layer);
+    
     return scene;
 }
 

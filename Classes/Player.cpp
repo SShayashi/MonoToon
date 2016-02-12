@@ -38,6 +38,17 @@ bool Player::init()
 //        _frames.pushBack(frame);
 //    }
 //    this->setAnimation();
+    auto body = PhysicsBody::createCircle(this->getContentSize().width / 2.0);
+    // 剛体の回転を無効にする
+    body->setRotationEnable(false);
+    //    // カテゴリをPLAYERにセットする
+    //    body->setCategoryBitmask(static_cast<int>(Stage::TileType::PLAYER));
+    // 全ての剛体と衝突する
+    body->setCollisionBitmask(INT_MAX);
+    // 全ての剛体の接触判定を行う
+    body->setContactTestBitmask(INT_MAX);
+    this->setPhysicsBody(body);
+    
     
     setTag((int)Helper::CHARA::PLAYER);
     setSpeed(PLAYER_SPEED_DEFAULT);

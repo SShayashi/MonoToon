@@ -43,6 +43,8 @@ bool Character::init()
 ////    this->setAnimation();
 //    this->scheduleUpdate();
 //    setAngle(Helper::ANGLE8::BOTTOM_CENTER);
+    
+    
     setDirectionalVec(Vec2(0, -1));
     return true;
 }
