@@ -15,7 +15,8 @@ USING_NS_CC;
 StageLayer::StageLayer():
 _player(NULL),
 _hudlayer(NULL),
-_renderTexture(NULL)
+_renderTexture(NULL),
+_level(0)
 {
     
 }
@@ -25,14 +26,18 @@ StageLayer::~StageLayer(){
     CC_SAFE_RELEASE_NULL(_hudlayer);
     CC_SAFE_RELEASE_NULL(_renderTexture);
 }
-bool StageLayer::init()
+bool StageLayer::initWithLevel(int level)
 {
     if ( !Layer::init() )
     {
         return false;
     }
-    winSize = Director::getInstance()->getVisibleSize();
+    if(level == 0){
+        return false;
+    }
     
+    winSize = Director::getInstance()->getVisibleSize();
+    _level = level;
     //レンダリング用のテクスチャの初期化
     auto renderTexture = RenderTexture::create(winSize.width, winSize.height);
 //    renderTexture->setClearColor(cocos2d::Color4F(0,0,1,0.5));
