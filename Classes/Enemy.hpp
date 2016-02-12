@@ -10,5 +10,23 @@
 #define Enemy_hpp
 
 #include <stdio.h>
+#include "cocos2d.h"
+#include "Character.hpp"
+
+
+class Enemy :public Character
+{
+protected:
+    Enemy();
+    virtual ~Enemy();
+    
+public:
+    bool init() override;
+    void update(float dt) override;
+    void setAnimation();
+    //    CC_SYNTHESIZE_PASS_BY_REF(cocos2d::Vec2, _acceleration, Acceleration);
+    
+    CREATE_FUNC(Enemy);
+};
 
 #endif /* Enemy_hpp */
