@@ -21,6 +21,10 @@ _renderTexture(NULL)
 }
 
 StageLayer::~StageLayer(){
+    _enemys.clear();
+    _drawedInks.clear();
+    _shotInks.clear();
+    
     CC_SAFE_RELEASE_NULL(_player);
     CC_SAFE_RELEASE_NULL(_hudlayer);
     CC_SAFE_RELEASE_NULL(_renderTexture);
@@ -62,7 +66,7 @@ bool StageLayer::init()
     _enemys.pushBack(enemy);
     
     time = 0;
-    this->scheduleUpdate();
+//    this->scheduleUpdate();
     return true;
 }
 
@@ -154,7 +158,7 @@ void StageLayer::drawInk(cocos2d::Sprite *shotink){
     this->removeSamePositionDrawedInk(&pos);
     tiledink->setPosition(shotink->getPosition());
     
-    _drawedInks.pushBack(tiledink);
+//    _drawedInks.pushBack(tiledink);
     tiledink->visit();
     _renderTexture->end();
     tiledink->retain();

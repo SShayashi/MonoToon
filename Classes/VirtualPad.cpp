@@ -26,8 +26,8 @@ VirtualPad::VirtualPad()
  *デストラクタ
  */
 VirtualPad::~VirtualPad(){
-    CC_SAFE_RELEASE_NULL(_padBack);
-    CC_SAFE_RELEASE_NULL(_padFront);
+//    CC_SAFE_RELEASE_NULL(_padBack);
+//    CC_SAFE_RELEASE_NULL(_padFront);
 }
 
 

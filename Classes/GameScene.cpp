@@ -50,17 +50,17 @@ bool GameScene::init()
     }
     winSize = Director::getInstance()->getWinSize();
     auto rootNode = CSLoader::createNode("StageLayer.csb");
-    addChild(rootNode);
+    this->addChild(rootNode);
     
     auto stagelayer = StageLayer::create();
     _stagelayer = stagelayer;
-    addChild(_stagelayer);
+    this->addChild(_stagelayer);
     
     int second = static_cast<int>(_second);
     _secondLabel = Label::createWithSystemFont(StringUtils::toString(second), "../fonts/misaki.ttf", 64);
     _secondLabel->setPosition(Vec2(winSize.width /2.0 , winSize.height -70));
     _secondLabel->setColor(Color3B::GRAY);
-    addChild(_secondLabel);
+    this->addChild(_secondLabel);
     
     this->scheduleUpdate();
     return true;
@@ -99,17 +99,22 @@ void GameScene::addReadyLabel()
     ready->runAction(Sequence::create(ScaleTo::create(0.25, 1), // 0.25秒かけて等倍に拡大される
                                       DelayTime::create(1.0), // 1.0秒待つ
                                       CallFunc::create([this, start] { // ラムダの中でthisとstart変数を使っているのでキャプチャに加える
-        this->addChild(start); // 「スタート」のラベルを追加する（この時点でスタートのアニメーションが始まる）
-        _state = GameState::PLAYING; // ゲーム状態をPLAYINGに切り替える
-        this->_stagelayer->scheduleUpdate();
-        // BGMを鳴らす
-    }),
+                                        this->addChild(start); // 「スタート」のラベルを追加する（この時点でスタートのアニメーションが始まる）
+                                        _state = GameState::PLAYING; // ゲーム状態をPLAYINGに切り替える
+                                        this->_stagelayer->scheduleUpdate();
+                                        // BGMを鳴らす
+                                        }),
                                       RemoveSelf::create(), // 自分を削除する
                                       NULL));
 }
 
 
 void GameScene::update(float dt){
+    
+    if(_second <= 0 ){
+        _state = GameState::ENDING;
+    }
+
     /* 残り時間を減らす */
     if(_state == GameState::PLAYING){
         _second -= dt;
@@ -131,12 +136,7 @@ void GameScene::update(float dt){
     /* 表示の更新 */
     int second = static_cast<int>(_second);
     _secondLabel->setString(StringUtils::toString(second));
-    
-    if(_second <= 0 ){
-
-        _state = GameState::ENDING;
-    }
-
+   
 }
 
 
@@ -165,6 +165,7 @@ bool GameScene::judgeGame(){
 void GameScene::onClear(){
     Helper::getInstance()->_gameLevel++;
     _stagelayer->unscheduleUpdate();
+    this->unscheduleUpdate();
     _state = GameState::CLEAR;
     
     auto layer = WinModal::create();
@@ -173,9 +174,11 @@ void GameScene::onClear(){
 
 }
 void GameScene::onLose(){
-    _stagelayer->unscheduleUpdate();
-    
     Helper::getInstance()->_gameLevel = 1;
+    _stagelayer->unscheduleUpdate();
+    this->unscheduleUpdate();
+    _state = GameState::LOSE;
+    
     auto layer = LoseModal::create();
     layer->setName("LoseModal");
     this->addChild(layer);
