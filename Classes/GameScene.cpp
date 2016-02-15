@@ -11,7 +11,7 @@
 #include "ui/CocosGUI.h"
 
 /* 制限時間 */
-const float TIME_LIMIT_SECOND = 20;
+const float TIME_LIMIT_SECOND = 1;
 USING_NS_CC;
 using namespace cocostudio::timeline;
 GameScene::GameScene():
@@ -33,7 +33,7 @@ Scene* GameScene::createScene()
     world->setGravity(Vec2::ZERO);
     /* デバッグビルドのとき */
     /* 物理空間にデバッグ用の表示を追加する */
-    world -> setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+//    world -> setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
     
     auto layer = GameScene::create();
     scene->addChild(layer);
@@ -49,7 +49,7 @@ bool GameScene::init()
         return false;
     }
     winSize = Director::getInstance()->getWinSize();
-    auto rootNode = CSLoader::createNode("MainScene.csb");
+    auto rootNode = CSLoader::createNode("StageLayer.csb");
     addChild(rootNode);
     
     auto stagelayer = StageLayer::create();
@@ -116,6 +116,7 @@ void GameScene::update(float dt){
     }else if (_state == GameState::READY){
         _second = TIME_LIMIT_SECOND;
     }else if(_state == GameState::ENDING){
+        
         _second = 0;
         if(this->judgeGame()){
             this->onClear();
@@ -123,6 +124,8 @@ void GameScene::update(float dt){
             this->onLose();
         }
             
+    }else{
+        
     }
     
     /* 表示の更新 */
@@ -141,8 +144,8 @@ bool GameScene::judgeGame(){
 
     int players=0;
     int enemys =0;
-    auto childs = _stagelayer->getChildren();
-    for(auto node : childs){
+    auto drawedInks = _stagelayer->getDrawedInks();
+    for(auto node : drawedInks){
         if(node->getTag() == (int)Helper::CHARA::PLAYER){
             players++;
         }else if(node->getTag() == (int)Helper::CHARA::ENEMY){
@@ -151,18 +154,30 @@ bool GameScene::judgeGame(){
             
         }
     }
-    
+    CCLOG("palyer : %d  \n enemy :%d",players , enemys);
     if(players >= enemys)
         return true;
     else
         return false;
-    
-    return false;
+
 }
 
 void GameScene::onClear(){
     Helper::getInstance()->_gameLevel++;
+    _stagelayer->unscheduleUpdate();
+    _state = GameState::CLEAR;
+    
+    auto layer = WinModal::create();
+    layer->setName("WinModal");
+    this->addChild(layer);
+
 }
 void GameScene::onLose(){
+    _stagelayer->unscheduleUpdate();
+    
     Helper::getInstance()->_gameLevel = 1;
+    auto layer = LoseModal::create();
+    layer->setName("LoseModal");
+    this->addChild(layer);
+
 }

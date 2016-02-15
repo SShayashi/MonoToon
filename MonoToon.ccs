@@ -4,11 +4,13 @@
     <Group ctype="ResourceGroup">
       <RootFolder Name=".">
         <Image Name="HelloWorld.png" />
-        <Project Name="TitleScene.csd" Type="Scene" />
+        <Project Name="LoseModal.csd" Type="Layer" />
+        <File Name="MainScene.csb" />
         <TTF Name="PixelMplus12-Regular.ttf" />
         <Image Name="tile.png" />
-        <Project Name="LoseModal.csd" Type="Layer" />
+        <Project Name="TitleScene.csd" Type="Scene" />
         <Project Name="WinModal.csd" Type="Layer" />
+        <Project Name="StageLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

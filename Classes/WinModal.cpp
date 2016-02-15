@@ -38,11 +38,11 @@ bool WinModal::init()
             CCLOG("リトライボタンが押されました");
             // 遷移先の画面のインスタンス
             Scene *pScene = GameScene::createScene();
-            TransitionFade* transition = TransitionFade::create(0.0f, pScene);
+            TransitionFade* transition = TransitionFade::create(1.0f, pScene);
             Director::getInstance()->replaceScene(transition);
             
             //好きな処理
-            this->menuCloseCallback(pSender);
+//            this->menuCloseCallback(pSender);
         }
     });
     

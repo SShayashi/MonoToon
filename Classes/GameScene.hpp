@@ -14,6 +14,8 @@
 #include "HudLayer.hpp"
 #include "StageLayer.hpp"
 #include "Helper.hpp"
+#include "WinModal.hpp"
+#include "LoseModal.hpp"
 
 USING_NS_CC;
 class GameScene : public cocos2d::Layer

@@ -11,12 +11,14 @@
 USING_NS_CC;
 
 HudLayer::HudLayer():
+_virPad(NULL),
 _buttonTouchFlag(false){
     
 }
 
 HudLayer::~HudLayer(){
-    
+    _virPad->unscheduleUpdate();
+    CC_SAFE_RELEASE_NULL(_virPad);
 }
 bool HudLayer::init()
 {
@@ -36,7 +38,7 @@ bool HudLayer::init()
     
     auto virPad = VirtualPad::create();
     _virPad = virPad;
-    addChild(_virPad);
+    this->addChild(_virPad);
     
     auto uButton = ui::Button::create();
     uButton->setTouchEnabled(true);
@@ -68,7 +70,7 @@ bool HudLayer::init()
         }
     });
 
-    addChild(uButton);
+    this->addChild(uButton);
 
     
     this->scheduleUpdate();

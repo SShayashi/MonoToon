@@ -45,6 +45,7 @@ public:
     void detectContactDrawedInk();
     void contactDrawedInk(Sprite *drawedink,Node *node);
     void removeSamePositionDrawedInk(Vec2* position);
+    bool removeEnemy(Node *enemy);
     
     //敵の追加処理
     void addEnemy();

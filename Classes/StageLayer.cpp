@@ -140,10 +140,16 @@ void StageLayer::drawInk(cocos2d::Sprite *shotink){
     //auto polygonでやるにはphisicsbodyを使う必要がある。
     //auto pinfo = AutoPolygon::generatePolygon("ink/ink_brack.png");
     Sprite* tiledink;
-    if(shotink->getTag() == (int)Helper::CHARA::PLAYER)
+
+    if(shotink->getTag() == (int)Helper::CHARA::PLAYER){
+
         tiledink = Sprite::create("ink/ink_brack.png");
-    else if(shotink->getTag() == (int)Helper::CHARA::ENEMY)
+                    tiledink->setTag(0);
+    }else if(shotink->getTag() == (int)Helper::CHARA::ENEMY){
+
         tiledink = Sprite::create("ink/ink_white.png");
+                            tiledink->setTag(1);
+    }
     auto pos = shotink->getPosition();
     this->removeSamePositionDrawedInk(&pos);
     tiledink->setPosition(shotink->getPosition());
@@ -172,6 +178,8 @@ void StageLayer::detectHitShotInk(){
     for(auto& shotink : _shotInks){
         //インクのタグから当たり判定を取る画像を取得して、当てるものだけ
         auto tag = shotink->getTag();
+        //たまにタグが設定されないバグを修正
+        if(tag == 1 || tag ==0){
         auto boundingbox = shotink->getBoundingBox();
         auto childs = this->getChildren();
         
@@ -184,6 +192,7 @@ void StageLayer::detectHitShotInk(){
                 if(isHit)
                     this->hitShotInk(shotink , node);
             }
+        }
         }
     }
 }
@@ -215,7 +224,9 @@ void StageLayer::detectContactDrawedInk(){
  * @param node :inkにあたったchara
  */
 void StageLayer::hitShotInk(cocos2d::Sprite *ink,Node *node){
-    //
+    if(node->getTag() == (int)Helper::CHARA::ENEMY){
+        removeEnemy(node);
+    }
     this->removeShotInk(ink);
 }
 
@@ -256,6 +267,18 @@ void StageLayer::shotEnemy(){
         }
     }
 }
+//発射したinkを削除
+bool StageLayer::removeEnemy(Node *node){
+    auto enemy = dynamic_cast<Enemy*>(node);
+    if(_enemys.contains(enemy))
+    {
+        enemy->removeFromParent();
+        _enemys.eraseObject(enemy);
+        return true;
+    }
+    return false;
+}
+
 
 //位置が全く同じインクは削除
 void StageLayer::removeSamePositionDrawedInk(cocos2d::Vec2 *position){
