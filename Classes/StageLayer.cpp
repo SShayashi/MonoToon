@@ -37,20 +37,20 @@ bool StageLayer::init()
     auto renderTexture = RenderTexture::create(winSize.width, winSize.height);
     renderTexture->setClearColor(cocos2d::Color4F(0,0,1,0.5));
     renderTexture->setPosition(Vec2(winSize.width/2, winSize.height/2));
-    _renderTexture = renderTexture;
-    addChild(_renderTexture);
+    this->setRenderTexture(renderTexture);
+    this->addChild(_renderTexture);
 
     
     //操作用レイヤの追加
     auto hudlayer = HudLayer::create();
-    _hudlayer = hudlayer;
-    addChild(_hudlayer,10001);
+    this->setHudLayer(hudlayer);
+    this->addChild(_hudlayer,10001);
     
     //プレイヤーの追加
     auto player = Player::create();
     player->setPosition(0,0);
-    _player = player;
-    addChild(_player,10000);
+    this->setPlayer(player);
+    this->addChild(_player,10000);
     
     
     //デバッグ用に敵キャラの追加
@@ -58,7 +58,7 @@ bool StageLayer::init()
     enemy->setTag((int)Helper::CHARA::ENEMY);
     enemy->setTexture("character/enemy/picocassette_sozai_41.png");
     enemy->setPosition(Vec2(500,500));
-    addChild(enemy);
+    this->addChild(enemy);
     _enemys.pushBack(enemy);
     
     time = 0;

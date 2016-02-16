@@ -26,8 +26,8 @@ VirtualPad::VirtualPad()
  *デストラクタ
  */
 VirtualPad::~VirtualPad(){
-//    CC_SAFE_RELEASE_NULL(_padBack);
-//    CC_SAFE_RELEASE_NULL(_padFront);
+    CC_SAFE_RELEASE_NULL(_padBack);
+    CC_SAFE_RELEASE_NULL(_padFront);
 }
 
 
@@ -41,18 +41,21 @@ bool VirtualPad::init(){
     Size size = Director::getInstance()->getVisibleSize();
     
     //画像の生成（Pad下地）
-    _padBack = Sprite::create("virtualpad/virtualpad_bg.png");
-    _padBack->setAnchorPoint(Point(0.5f,0.5f));
-    _padBack->setPosition(Point(size.width*VIRTUAL_PAD_POSITION_RATE_X, size.height*VIRTUAL_PAD_POSITION_RATE_Y));
-    
+    auto padBack = Sprite::create("virtualpad/virtualpad_bg.png");
+    padBack->setAnchorPoint(Point(0.5f,0.5f));
+    padBack->setPosition(Point(size.width*VIRTUAL_PAD_POSITION_RATE_X, size.height*VIRTUAL_PAD_POSITION_RATE_Y));
+    this->setPadBack(padBack);
     /* 画像の生成（Pad操作部分） */
-    _padFront = Sprite::create("virtualpad/virtualpad_pad.png");
-    _padFront->setAnchorPoint(Point(0.5f,0.5f));
-    _padFront->setPosition(Point(size.width*VIRTUAL_PAD_POSITION_RATE_X, size.height*VIRTUAL_PAD_POSITION_RATE_Y));
+    auto padFront = Sprite::create("virtualpad/virtualpad_pad.png");
+    padFront->setAnchorPoint(Point(0.5f,0.5f));
+    padFront->setPosition(Point(size.width*VIRTUAL_PAD_POSITION_RATE_X, size.height*VIRTUAL_PAD_POSITION_RATE_Y));
+    this->setPadFront(padFront);
     
     /* パッドの初期位置 */
     init_x = _padFront->getPositionX();
     init_y = _padFront->getPositionY();
+    
+    
     
     //レイヤーに追加
     this->addChild(_padBack,10000);

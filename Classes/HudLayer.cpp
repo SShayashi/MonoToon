@@ -17,7 +17,7 @@ _buttonTouchFlag(false){
 }
 
 HudLayer::~HudLayer(){
-    _virPad->unscheduleUpdate();
+    this->_virPad->unscheduleUpdate();
     CC_SAFE_RELEASE_NULL(_virPad);
 }
 bool HudLayer::init()
@@ -37,7 +37,7 @@ bool HudLayer::init()
     this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
     
     auto virPad = VirtualPad::create();
-    _virPad = virPad;
+    this->setVirtualPad(virPad);
     this->addChild(_virPad);
     
     auto uButton = ui::Button::create();

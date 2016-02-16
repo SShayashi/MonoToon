@@ -27,7 +27,7 @@ GameScene::~GameScene(){
 //    CC_SAFE_RELEASE_NULL(_secondLabel);
     
 //    ここは恐らくリークしてる。メモリ量が若干増えている。
-//    CC_SAFE_RELEASE_NULL(_stagelayer);
+    CC_SAFE_RELEASE_NULL(_stagelayer);
 }
 
 Scene* GameScene::createScene()
@@ -58,7 +58,7 @@ bool GameScene::init()
     this->addChild(rootNode);
     
     auto stagelayer = StageLayer::create();
-    setStageLayer(stagelayer);
+    this->setStageLayer(stagelayer);
     this->addChild(_stagelayer);
     
     int second = static_cast<int>(_second);
