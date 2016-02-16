@@ -24,7 +24,7 @@ _stagelayer(nullptr)
 }
 GameScene::~GameScene(){
 //    ここはリリースしなくてもメモリリークしないからよしとする。
-//    CC_SAFE_RELEASE_NULL(_secondLabel);
+    CC_SAFE_RELEASE_NULL(_secondLabel);
     
 //    ここは恐らくリークしてる。メモリ量が若干増えている。
     CC_SAFE_RELEASE_NULL(_stagelayer);
