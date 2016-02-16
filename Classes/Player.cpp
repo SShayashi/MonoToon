@@ -8,7 +8,7 @@
 
 #include "Player.hpp"
 USING_NS_CC;
-#define PLAYER_SPEED_DEFAULT 5
+#define PLAYER_SPEED_DEFAULT 3.5
 
 Player::Player()
 {

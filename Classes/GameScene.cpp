@@ -11,7 +11,7 @@
 #include "ui/CocosGUI.h"
 
 /* 制限時間 */
-const float TIME_LIMIT_SECOND = 1;
+const float TIME_LIMIT_SECOND = 20;
 USING_NS_CC;
 using namespace cocostudio::timeline;
 GameScene::GameScene():
@@ -23,8 +23,10 @@ _stagelayer(nullptr)
     
 }
 GameScene::~GameScene(){
-//    ここはリリースしなくてもメモリリークしないからよしとする。むしろリリースしたほうがエラーが出る
+//    ここはリリースしなくてもメモリリークしないからよしとする。
 //    CC_SAFE_RELEASE_NULL(_secondLabel);
+    
+//    ここは恐らくリークしてる。メモリ量が若干増えている。
 //    CC_SAFE_RELEASE_NULL(_stagelayer);
 }
 
@@ -72,7 +74,7 @@ bool GameScene::init()
 
 void GameScene::onEnterTransitionDidFinish()
 {
-//    _stagelayer->unscheduleUpdate();
+    _stagelayer->unscheduleUpdate();
     // シーン遷移が完了したとき
     Layer::onEnterTransitionDidFinish();
     this->addReadyLabel();
@@ -105,7 +107,7 @@ void GameScene::addReadyLabel()
                                       CallFunc::create([this, start] { // ラムダの中でthisとstart変数を使っているのでキャプチャに加える
                                         this->addChild(start); // 「スタート」のラベルを追加する（この時点でスタートのアニメーションが始まる）
                                         _state = GameState::PLAYING; // ゲーム状態をPLAYINGに切り替える
-//                                        this->_stagelayer->scheduleUpdate();
+                                        this->_stagelayer->scheduleUpdate();
                                         // BGMを鳴らす
                                         }),
                                       RemoveSelf::create(), // 自分を削除する
@@ -148,16 +150,16 @@ bool GameScene::judgeGame(){
 
     int players=0;
     int enemys =0;
-//    auto drawedInks = _stagelayer->getDrawedInks();
-//    for(auto node : drawedInks){
-//        if(node->getTag() == (int)Helper::CHARA::PLAYER){
-//            players++;
-//        }else if(node->getTag() == (int)Helper::CHARA::ENEMY){
-//            enemys++;
-//        }else{
-//            
-//        }
-//    }
+    auto drawedInks = _stagelayer->getDrawedInks();
+    for(auto node : drawedInks){
+        if(node->getTag() == (int)Helper::CHARA::PLAYER){
+            players++;
+        }else if(node->getTag() == (int)Helper::CHARA::ENEMY){
+            enemys++;
+        }else{
+            
+        }
+    }
     CCLOG("palyer : %d  \n enemy :%d",players , enemys);
     if(players >= enemys)
         return true;
@@ -168,7 +170,7 @@ bool GameScene::judgeGame(){
 
 void GameScene::onClear(){
     Helper::getInstance()->_gameLevel++;
-//    _stagelayer->unscheduleUpdate();
+    _stagelayer->unscheduleUpdate();
     this->unscheduleUpdate();
     _state = GameState::CLEAR;
     
@@ -179,7 +181,7 @@ void GameScene::onClear(){
 }
 void GameScene::onLose(){
     Helper::getInstance()->_gameLevel = 1;
-//    _stagelayer->unscheduleUpdate();
+    _stagelayer->unscheduleUpdate();
     this->unscheduleUpdate();
     _state = GameState::LOSE;
     

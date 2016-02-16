@@ -21,10 +21,6 @@ _renderTexture(NULL)
 }
 
 StageLayer::~StageLayer(){
-    _enemys.clear();
-    _drawedInks.clear();
-    _shotInks.clear();
-    
     CC_SAFE_RELEASE_NULL(_player);
     CC_SAFE_RELEASE_NULL(_hudlayer);
     CC_SAFE_RELEASE_NULL(_renderTexture);
@@ -39,7 +35,7 @@ bool StageLayer::init()
     winSize = Director::getInstance()->getVisibleSize();
     //レンダリング用のテクスチャの初期化
     auto renderTexture = RenderTexture::create(winSize.width, winSize.height);
-//    renderTexture->setClearColor(cocos2d::Color4F(0,0,1,0.5));
+    renderTexture->setClearColor(cocos2d::Color4F(0,0,1,0.5));
     renderTexture->setPosition(Vec2(winSize.width/2, winSize.height/2));
     _renderTexture = renderTexture;
     addChild(_renderTexture);
@@ -66,7 +62,7 @@ bool StageLayer::init()
     _enemys.pushBack(enemy);
     
     time = 0;
-//    this->scheduleUpdate();
+    this->scheduleUpdate();
     return true;
 }
 
@@ -158,7 +154,7 @@ void StageLayer::drawInk(cocos2d::Sprite *shotink){
     this->removeSamePositionDrawedInk(&pos);
     tiledink->setPosition(shotink->getPosition());
     
-//    _drawedInks.pushBack(tiledink);
+    _drawedInks.pushBack(tiledink);
     tiledink->visit();
     _renderTexture->end();
     tiledink->retain();
