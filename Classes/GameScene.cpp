@@ -25,7 +25,7 @@ _stagelayer(nullptr)
 GameScene::~GameScene(){
 //    ここはリリースしなくてもメモリリークしないからよしとする。むしろリリースしたほうがエラーが出る
 //    CC_SAFE_RELEASE_NULL(_secondLabel);
-    CC_SAFE_RELEASE_NULL(_stagelayer);
+//    CC_SAFE_RELEASE_NULL(_stagelayer);
 }
 
 Scene* GameScene::createScene()
@@ -55,10 +55,10 @@ bool GameScene::init()
     auto rootNode = CSLoader::createNode("StageLayer.csb");
     this->addChild(rootNode);
     
-//    auto stagelayer = StageLayer::create();
-//    _stagelayer = stagelayer;
-//    this->addChild(_stagelayer);
-//    
+    auto stagelayer = StageLayer::create();
+    setStageLayer(stagelayer);
+    this->addChild(_stagelayer);
+    
     int second = static_cast<int>(_second);
     auto secondLabel = Label::createWithSystemFont(StringUtils::toString(_second), "misaki", 64);
     secondLabel->setPosition(Vec2(winSize.width /2.0 , winSize.height -70));
