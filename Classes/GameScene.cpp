@@ -17,12 +17,14 @@ using namespace cocostudio::timeline;
 GameScene::GameScene():
 _state(GameState::READY),
 _secondLabel(NULL),
-_second(TIME_LIMIT_SECOND)
+_second(TIME_LIMIT_SECOND),
+_stagelayer(nullptr)
 {
     
 }
 GameScene::~GameScene(){
     CC_SAFE_RELEASE_NULL(_secondLabel);
+    CC_SAFE_RELEASE_NULL(_stagelayer);
 }
 
 Scene* GameScene::createScene()

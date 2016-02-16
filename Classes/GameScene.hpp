@@ -23,8 +23,7 @@ class GameScene : public cocos2d::Layer
 private:
     GameScene();
     ~GameScene();
-    CC_SYNTHESIZE_RETAIN(StageLayer*, _stagelayer, StageLayer);
-public:
+   public:
     Size winSize;
     enum class GameState
     {
@@ -43,7 +42,8 @@ public:
     CC_SYNTHESIZE(GameState, _state, State);
     /* 制限時間用ラベル */
     CC_SYNTHESIZE_RETAIN(cocos2d::Label*, _secondLabel, SecondLabel);
-
+    
+    CC_SYNTHESIZE_RETAIN(StageLayer*, _stagelayer, StageLayer);
     void onEnterTransitionDidFinish() override;
     void addReadyLabel();
     void onEnding();
