@@ -16,14 +16,15 @@ USING_NS_CC;
 using namespace cocostudio::timeline;
 GameScene::GameScene():
 _state(GameState::READY),
-_secondLabel(NULL),
+_secondLabel(nullptr),
 _second(TIME_LIMIT_SECOND),
 _stagelayer(nullptr)
 {
     
 }
 GameScene::~GameScene(){
-    CC_SAFE_RELEASE_NULL(_secondLabel);
+//    ここはリリースしなくてもメモリリークしないからよしとする。むしろリリースしたほうがエラーが出る
+//    CC_SAFE_RELEASE_NULL(_secondLabel);
     CC_SAFE_RELEASE_NULL(_stagelayer);
 }
 
@@ -54,14 +55,15 @@ bool GameScene::init()
     auto rootNode = CSLoader::createNode("StageLayer.csb");
     this->addChild(rootNode);
     
-    auto stagelayer = StageLayer::create();
-    _stagelayer = stagelayer;
-    this->addChild(_stagelayer);
-    
+//    auto stagelayer = StageLayer::create();
+//    _stagelayer = stagelayer;
+//    this->addChild(_stagelayer);
+//    
     int second = static_cast<int>(_second);
-    _secondLabel = Label::createWithSystemFont(StringUtils::toString(second), "../fonts/misaki.ttf", 64);
-    _secondLabel->setPosition(Vec2(winSize.width /2.0 , winSize.height -70));
-    _secondLabel->setColor(Color3B::GRAY);
+    auto secondLabel = Label::createWithSystemFont(StringUtils::toString(_second), "misaki", 64);
+    secondLabel->setPosition(Vec2(winSize.width /2.0 , winSize.height -70));
+    secondLabel->setColor(Color3B::GRAY);
+    this->setSecondLabel(secondLabel);
     this->addChild(_secondLabel);
     
     this->scheduleUpdate();
@@ -70,7 +72,7 @@ bool GameScene::init()
 
 void GameScene::onEnterTransitionDidFinish()
 {
-    _stagelayer->unscheduleUpdate();
+//    _stagelayer->unscheduleUpdate();
     // シーン遷移が完了したとき
     Layer::onEnterTransitionDidFinish();
     this->addReadyLabel();
@@ -103,7 +105,7 @@ void GameScene::addReadyLabel()
                                       CallFunc::create([this, start] { // ラムダの中でthisとstart変数を使っているのでキャプチャに加える
                                         this->addChild(start); // 「スタート」のラベルを追加する（この時点でスタートのアニメーションが始まる）
                                         _state = GameState::PLAYING; // ゲーム状態をPLAYINGに切り替える
-                                        this->_stagelayer->scheduleUpdate();
+//                                        this->_stagelayer->scheduleUpdate();
                                         // BGMを鳴らす
                                         }),
                                       RemoveSelf::create(), // 自分を削除する
@@ -146,16 +148,16 @@ bool GameScene::judgeGame(){
 
     int players=0;
     int enemys =0;
-    auto drawedInks = _stagelayer->getDrawedInks();
-    for(auto node : drawedInks){
-        if(node->getTag() == (int)Helper::CHARA::PLAYER){
-            players++;
-        }else if(node->getTag() == (int)Helper::CHARA::ENEMY){
-            enemys++;
-        }else{
-            
-        }
-    }
+//    auto drawedInks = _stagelayer->getDrawedInks();
+//    for(auto node : drawedInks){
+//        if(node->getTag() == (int)Helper::CHARA::PLAYER){
+//            players++;
+//        }else if(node->getTag() == (int)Helper::CHARA::ENEMY){
+//            enemys++;
+//        }else{
+//            
+//        }
+//    }
     CCLOG("palyer : %d  \n enemy :%d",players , enemys);
     if(players >= enemys)
         return true;
@@ -166,7 +168,7 @@ bool GameScene::judgeGame(){
 
 void GameScene::onClear(){
     Helper::getInstance()->_gameLevel++;
-    _stagelayer->unscheduleUpdate();
+//    _stagelayer->unscheduleUpdate();
     this->unscheduleUpdate();
     _state = GameState::CLEAR;
     
@@ -177,7 +179,7 @@ void GameScene::onClear(){
 }
 void GameScene::onLose(){
     Helper::getInstance()->_gameLevel = 1;
-    _stagelayer->unscheduleUpdate();
+//    _stagelayer->unscheduleUpdate();
     this->unscheduleUpdate();
     _state = GameState::LOSE;
     
