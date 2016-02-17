@@ -98,10 +98,10 @@ void StageLayer::shotInk(Character &chara){
     ink->setTag(chara.getTag());
     ink->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
     ink->setPosition(chara.getPosition());
+    ink->setScale(random((float)0.5,(float)2.0));
     
     //ベクトルの差分で角度を取ると、より小さい角度で取得するので、キャラの方向から、どちらに回転させるか決めている
-    auto digree = Vec2::angle(chara.getDirectionalVec(), Vec2(1,0)) *180/PI;
-//    CCLOG("Digree : %f",digree);
+    auto digree = Vec2::angle(chara.getDirectionalVec(), Vec2(1,0)) *180/PI ;
     if(chara.getDirectionalVec().y >= 0 ){
         ink->setRotation(-digree);
     }else{
@@ -132,11 +132,7 @@ void StageLayer::shotInk(Character &chara){
 //発射したインクの着地点にインクを塗る処理
 void StageLayer::drawInk(cocos2d::Sprite *shotink){
 
-    //タグから判別
-    //床に同じ色のスプライトを貼る
-//    オフスクリーンレンダリングを行うと画面が真っ黒になるバグがあるのでしない
     _renderTexture->begin();
- 
     //auto polygonでやるにはphisicsbodyを使う必要がある。
     //auto pinfo = AutoPolygon::generatePolygon("ink/ink_brack.png");
     Sprite* tiledink;
@@ -144,12 +140,16 @@ void StageLayer::drawInk(cocos2d::Sprite *shotink){
     if(shotink->getTag() == (int)Helper::CHARA::PLAYER){
 
         tiledink = Sprite::create("ink/ink_brack.png");
-                    tiledink->setTag(0);
+        tiledink->setScale(shotink->getScale());
+        tiledink->setTag((int)Helper::CHARA::PLAYER);
+        
     }else if(shotink->getTag() == (int)Helper::CHARA::ENEMY){
 
         tiledink = Sprite::create("ink/ink_white.png");
-                            tiledink->setTag(1);
+        tiledink->setScale(shotink->getScale());
+        tiledink->setTag((int)Helper::CHARA::ENEMY);
     }
+    
     auto pos = shotink->getPosition();
     this->removeSamePositionDrawedInk(&pos);
     tiledink->setPosition(shotink->getPosition());
