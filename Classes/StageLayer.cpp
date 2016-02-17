@@ -98,10 +98,10 @@ void StageLayer::shotInk(Character &chara){
     ink->setTag(chara.getTag());
     ink->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
     ink->setPosition(chara.getPosition());
-    ink->setScale(random((float)0.5,(float)2.0));
+    ink->setScale(random((float)0.8,(float)1.6));
     
     //ベクトルの差分で角度を取ると、より小さい角度で取得するので、キャラの方向から、どちらに回転させるか決めている
-    auto digree = Vec2::angle(chara.getDirectionalVec(), Vec2(1,0)) *180/PI ;
+    auto digree = Vec2::angle(chara.getDirectionalVec(), Vec2(1,0)) *180/PI;
     if(chara.getDirectionalVec().y >= 0 ){
         ink->setRotation(-digree);
     }else{
@@ -123,8 +123,8 @@ void StageLayer::shotInk(Character &chara){
     /*予め作っているアニメーションを連続で呼びだそうとするとエラーが出たので毎回作成する
      *キャラの向きによって射出する方向を変える
      */
-    auto shotVec = chara.getDirectionalVec()*chara.getShotDistance();
-    auto anime = MoveBy::create(0.4, shotVec);
+    auto shotVec = chara.getDirectionalVec()*chara.getShotDistance()*(random((float)0.8, (float)1.4));
+    auto anime = MoveBy::create(0.2, shotVec);
     auto sequence = Sequence::create(anime,remove_draw, NULL);
     ink->runAction(sequence);
 }
