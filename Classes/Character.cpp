@@ -8,11 +8,15 @@
 
 #include "Character.hpp"
 USING_NS_CC;
-int FRAME_COUNT=3;
 
 Character::Character()
 :_speed(NULL)
 ,_oldSpeed(NULL)
+,_speedOnIka(NULL)
+,_inkAmount(NULL)
+,_maxInkAmount(NULL)
+,_shotDistance(NULL)
+,_shotDistanceError(NULL)
 ,_shotMovement(NULL)
 ,_ink(NULL)
 {
@@ -29,21 +33,6 @@ bool Character::init()
     if (!Sprite::init()) {
         return false;
     }
-    
-    /* アニメーションの作成 */
-    //    Vector<SpriteFrame *> frames;
-    /* アニメ用のフレームを読み込む */
-    //    fileName[128] = {0};
-//    for(int i = 1 ; i < FRAME_COUNT ; i++ ){
-//        sprintf(fileName, "character/futsuo_00%d.png", i);
-//        auto rect  = this->getTextureRect();
-//        auto frame = SpriteFrame::create(fileName,rect);
-//        _frames.pushBack(frame);
-//    }
-////    this->setAnimation();
-//    this->scheduleUpdate();
-//    setAngle(Helper::ANGLE8::BOTTOM_CENTER);
-    
     
     setDirectionalVec(Vec2(0, -1));
     setShotDistance(60);
