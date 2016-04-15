@@ -93,6 +93,7 @@ void StageLayer::update(float dt){
 //インクの発射処理
 void StageLayer::shotInk(Character &chara){
     
+    //持ちインクの量を減らす
     //画像の作成
     auto ink = Sprite::create(chara.getInk()->getResourceName());
     ink->setTag(chara.getTag());
@@ -107,7 +108,6 @@ void StageLayer::shotInk(Character &chara){
     }else{
         ink->setRotation(digree);
     }
-
     this->addChild(ink);
     _shotInks.pushBack(ink);
     
